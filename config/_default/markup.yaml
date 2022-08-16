@@ -1,0 +1,14 @@
+tableOfContents:
+  startLevel: 2
+  endLevel: 4
+
+goldmark:
+  parser:
+    attribute:
+      block: true
+
+highlight:
+  codeFences: true
+  lineNoStart: 1
+  noClasses: false
+  tabWidth: 4

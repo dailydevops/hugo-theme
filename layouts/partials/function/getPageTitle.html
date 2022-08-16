@@ -1,0 +1,9 @@
+{{ $title := .Page.Scratch.Get "head-title" | default nil }}
+{{ if not ($title)}}
+  {{ $title = .Site.Title }}
+  {{ if or (.IsPage) (.IsSection) }}
+    {{ $title = printf "%s &mdash; %s" .Title .Site.Title }}
+  {{ end }}
+  {{ .Page.Scratch.Set "head-title" $title }}
+{{ end }}
+{{ return $title }}

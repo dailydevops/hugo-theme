@@ -1,0 +1,29 @@
+.pager {
+  display: flex;
+  justify-content: space-between;
+  flex: 1 0 100%;
+  order: 9;
+
+  & > a {
+    flex: 1 1 50%;
+  }
+
+  .prev {
+    text-align: right;
+  }
+
+  .prev:first-child {
+    max-width: 100%;
+  }
+
+  .title {
+    margin-bottom: 0;
+    font-size: .8125rem;
+  }
+
+  .sub {
+    margin-bottom: 5px;
+    font-weight: 700;
+    line-height: 1;
+  }
+}

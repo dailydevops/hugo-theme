@@ -1,0 +1,25 @@
+{{ $sidebar := false }}
+{{ $widgets := (slice) }}
+{{ if eq .Kind "home" }}
+  {{ $sidebar = (.Site.Params.sidebar.home.enabled | default $sidebar) }}
+  {{ $widgets = (.Site.Params.sidebar.home.widgets | default $widgets) }}
+{{ else if and (eq .Type "posts") (eq .Kind "page") }}
+  {{ $sidebar = (.Site.Params.sidebar.posts.enabled | default $sidebar) }}
+  {{ $widgets = (.Site.Params.sidebar.posts.widgets | default $widgets) }}
+{{ else if and (ne .Type "posts") (eq .Kind "page") }}
+  {{ $sidebar = (.Site.Params.sidebar.single.enabled | default .Params.sidebar.enabled | default $sidebar) }}
+  {{ $widgets = (.Site.Params.sidebar.single.widgets | default .Params.sidebar.widgets | default $widgets) }}
+{{ else }}
+  {{ $sidebar = (.Site.Params.sidebar.list.enabled | default .Params.sidebar.enabled | default $sidebar) }}
+  {{ $widgets = (.Site.Params.sidebar.list.widgets | default .Params.sidebar.widgets | default $widgets) }}
+{{ end }}
+{{ if and ($sidebar) ($widgets) }}
+<aside class="sidebar divider{{ if eq $sidebar "left" }} left{{ end }}">
+{{ $root := . }}
+{{ with $widgets }}
+	{{ range $widget := . }}
+		{{ partial (printf "sidebar/%s.html" $widget) $root }}
+	{{ end }}
+{{ end }}
+</aside>
+{{ end }}

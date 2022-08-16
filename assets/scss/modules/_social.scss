@@ -1,0 +1,81 @@
+@import "../mixins/breakpoint";
+
+.share {
+  @include breakpoint-up($theme-breakpoint-sidebar-max) {
+    position: fixed;
+    top: 20%;
+    right: 0;
+    border: 1px solid $theme-accent-dark-grey;
+    border-right-width: 0;
+    border-radius: $theme-border-radius 0 0 $theme-border-radius;
+  }
+
+  @include breakpoint-down($theme-breakpoint-sidebar-max) {
+    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .icon {
+    color: $theme-color-primary;
+    @include breakpoint-down($theme-breakpoint-sidebar-max) {
+      display: inline-block;
+    }
+    @include breakpoint-up($theme-breakpoint-sidebar-max) {
+      display: block;
+      padding: 16px;
+      background-color: $theme-accent-light-grey;
+
+      &:nth-child(2) {
+        border-top-left-radius: $theme-border-radius;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: $theme-border-radius;
+      }
+    }
+
+    > i {
+      font-size: 2rem;
+      aspect-ratio: 1/1;
+
+      &::before {
+        vertical-align: sub;
+      }
+    }
+  }
+
+  @each $brand, $color in $theme-brands {
+    .icon.#{$brand} {
+      &:hover,
+      &:active {
+        color: $theme-color-white;
+        background-color: $color;
+      }
+    }
+  }
+}
+
+.social {
+  justify-content: space-evenly;
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    font-size: 1rem;
+  }
+
+  .icon {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  @each $brand, $color in $theme-brands {
+    .icon.#{$brand} {
+      &:hover,
+      &:active {
+        color: $color;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import "../mixins/breakpoint";
+
+.container {
+  position: relative;
+  background-color: $theme-accent-light-grey;
+  word-wrap: break-word;
+
+  @include breakpoint-down(md) {
+    margin: $theme-spacer-below auto;
+    padding: 0 $theme-spacer-below;
+  }
+
+  @include breakpoint-up(md) {
+    margin: $theme-spacer-above auto;
+    padding: 0 $theme-spacer-above;
+  }
+
+  @each $breakpoint, $container-max in $theme-container-width {
+    @if ($container-max != 0) {
+      @include breakpoint-only($breakpoint) {
+        max-width: $container-max;
+      }
+    }
+  }
+}
+
+.divider {
+  flex: 1 0 90%;
+  border-top: .375rem solid $theme-color-secondary;
+}

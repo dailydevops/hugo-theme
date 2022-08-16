@@ -1,0 +1,24 @@
+{{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" (partial "function/getMainSections" .)) }}
+{{ if or ($paginator.HasPrev) ($paginator.HasNext) }}
+{{ $title := partial "function/getPageTitle" . | plainify | safeHTML }}
+<nav class="pagination">
+	<a
+    class="item"
+    {{ if $paginator.HasPrev }}
+    href="{{ $paginator.Prev.URL }}"´
+    hreflang="{{ $.Site.LanguageCode | lower }}"
+    title="{{ T "pagination-title" (dict "Title" $title "Page" $paginator.Prev.PageNumber) | safeHTML }}"
+    {{ end }}
+    rel="next"{{ if not $paginator.HasPrev }}disabled{{ end }}
+  ><i class="fa-solid fa-backward"></i></a>
+	<span class="current item">{{ printf "%d&nbsp;/&nbsp;%d" $paginator.PageNumber $paginator.TotalPages | safeHTML }}</span>
+	<a
+    class="item"
+    {{ if $paginator.HasNext }}
+    href="{{ $paginator.Next.URL }}"
+    hreflang="{{ $.Site.LanguageCode | lower }}"title="{{ T "pagination-title" (dict "Title" $title "Page" $paginator.Next.PageNumber) | safeHTML }}"
+    {{ end }}
+    rel="prev"{{ if not $paginator.HasNext }}disabled{{ end }}
+  ><i class="fa-solid fa-forward"></i></a>
+</nav>
+{{ end }}

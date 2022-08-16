@@ -1,0 +1,11 @@
+{{ if and (eq .Type "posts") (.IsPage) }}
+
+  {{ if .PublishDate.IsZero }}
+    {{ partial "function/throwError" (printf "%s: No publish date given." .RelPermalink) }}
+  {{ end }}
+
+  {{ if (and (eq .Params.author "default") (not .Params.disableValidationAuthor)) }}
+    {{ partial "function/throwError" (printf "%s: No author given." .RelPermalink) }}
+  {{ end }}
+
+{{ end }}

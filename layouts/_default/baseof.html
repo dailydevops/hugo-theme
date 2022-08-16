@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html
+  class="no-js"
+  lang="{{ .Site.Language.Lang }}"
+  dir="{{ site.Language.LanguageDirection | default "ltr" }}">
+<head>
+  {{ partial "validation" . }}
+  {{ partial "head" . }}
+  {{ partial "scripts/above" . }}
+</head>
+<body class="container">
+  {{ partial "header" . }}
+  <main class="body">
+    {{ partial "draft" . }}
+    {{ block "main" . }}{{ end }}
+    {{ partial "sidebar" . }}
+    {{ partial "article/pager" . }}
+  </main>
+  {{ partial "footer" . }}
+  {{ partial "scripts/below" . }}
+</body>
+</html>

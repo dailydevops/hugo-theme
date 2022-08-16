@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.powershell",
+			"cschleiden.vscode-github-actions",
+			"editorconfig.editorconfig",
+			"budparr.language-hugo-vscode",
+			"syler.sass-indented",
+			"esbenp.prettier-vscode"
+		]
+	}
+}

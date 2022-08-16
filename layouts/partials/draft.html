@@ -1,0 +1,35 @@
+{{ if .Site.IsServer }}
+<aside class="draft">
+  <header>
+    <h4>This block is only displayed during local execution and is only used for overview purposes.</h4>
+  </header>
+  <ul>
+    <li>Draft state: {{ with eq .Params.draft true }}<span class="focus">{{ . }}</span>{{ else }}false{{ end }}</li>
+    <li>Reading time: {{ .ReadingTime }} minute(s)</li>
+    <li>Word count: {{ if lt .WordCount 500 }}<span class="focus">{{ $.WordCount }} word(s)</span>{{ else }}{{ .WordCount }} word(s){{ end }}</li>
+    <li>Page kind: {{ .Kind }}</li>
+    <li>Page type: {{ .Type }}</li>
+    {{- $charCount := len .RawContent -}}
+    <li>Char count: {{ if lt $charCount 2500 }}<span class="focus">{{ $charCount }} chars(s)</span>{{ else }}{{ $charCount }} chars(s){{ end }}</li></li>
+
+    {{ if and (eq .Type "posts") (.IsPage) }}
+    <li class="head">Post Settings</li>
+    <li>Publish Date: {{ partial "value-or-not-set" .PublishDate }}</li>
+    <li>Author: {{ partial "value-or-not-set" .Params.author }}</li>
+    <li>VG-Wort marker: {{ partial "value-or-not-set" .Params.vgwort }}</li>
+    <li>Categories count: {{ partial "value-or-not-set" .Params.categories }}</li>
+    <li class="grow">Categories: {{ with .Params.categories }}{{ delimit . ", " }}{{ else }}{{ partial "not-set" }}{{ end }}</li>
+    <li>Tags count: {{ partial "value-or-not-set" .Params.tags }}</li>
+    <li class="grow">Tags: {{ with .Params.tags }}{{ delimit . ", " }}{{ else }}{{ partial "not-set" }}{{ end }}</li>
+    {{ end }}
+  </ul>
+</aside>
+{{ end }}
+
+{{ define "partials/value-or-not-set.html" }}
+{{ with . }}{{ if or (reflect.IsMap .) (reflect.IsSlice .) }}{{ len . }}{{ else }}{{ . }}{{ end }}{{ else }}{{ partial "not-set" }}{{ end }}
+{{ end }}
+
+{{ define "partials/not-set.html" }}
+<span class="focus">Not set</span>
+{{ end }}

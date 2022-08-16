@@ -1,0 +1,88 @@
+// COLORS - Primary
+// https://coolors.co/1155AA-ff9933-552299-555555-eeeeee-fafafa-000000
+$theme-color-primary: #{"{{ .Site.Params.colors.primary | default "#15a" }}"};
+$theme-color-secondary: #{"{{ .Site.Params.colors.secondary | default "#F93" }}"};
+$theme-color-tertiary: #{"{{ .Site.Params.colors.tertiary | default "#529" }}"};
+$theme-color-white: #{"{{ .Site.Params.colors.white | default "#fafafa" }}"};
+$theme-color-black: #{"{{ .Site.Params.colors.black | default "#000" }}"};
+
+// COLORS - Accent
+$theme-accent-dark-grey: #{"{{ .Site.Params.accent.dark | default "#555" }}"};
+$theme-accent-light-grey: #{"{{ .Site.Params.accent.light | default "#eee" }}"};
+
+// FONTS
+$theme-font-size: 16px;
+
+// BREAKPOINTS & CONTAINER
+$theme-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px,
+);
+$theme-breakpoint-sidebar-min: md;
+$theme-breakpoint-sidebar-max: lg;
+
+$theme-container-width: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1540px,
+);
+
+// SPACER
+$theme-spacer-below: .5rem;
+$theme-spacer-above: 1.5rem;
+$theme-spacer-bottom: .375em;
+$theme-spacer-highlight: .75rem;
+
+// CONTENT
+$theme-content-columns: 12;
+$theme-content-sidebar-columns: 3;
+
+// BORDER RADIUS
+$theme-border-radius: 1.5rem;
+
+// BRANDS
+$theme-brands: (
+  "bitbucket": #205081,
+  "codepen": #0ebeff,
+  "facebook": #1877f2,
+  "feed": $theme-color-primary,
+  "github": #4078c0,
+  "gitlab": #fca326,
+  "instagram": #405de6,
+  "linkedin": #0077b5,
+  "pinterest": #e60023,
+  "mail": $theme-color-primary,
+  "medium": #00ab6c,
+  "reddit": #ff4500,
+  "sms": $theme-accent-dark-grey,
+  "stackoverflow": #f48024,
+  "twitter": #1da1f2,
+  "youtube": #ff0000,
+  "xing": #026466,
+);
+
+// TABLE
+$theme-table-border-color: $theme-accent-light-grey;
+$theme-thead-border-color: $theme-color-primary;
+$theme-table-background-color: $theme-accent-light-grey;
+$theme-table-border-style: 1px solid $theme-table-border-color;
+
+/* purgecss start ignore */
+// The new css reset
+@import "reset";
+/* purgecss end ignore */
+
+// Hugo Theme - NetEvolve
+@import "mixins";
+@import "modules";
+
+// Font Awesome
+@import "brands";
+@import "solid";
+@import "fontawesome";

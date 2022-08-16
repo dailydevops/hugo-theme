@@ -1,0 +1,12 @@
+{{ $destination := .destination }}
+{{ $page := .page }}
+{{ $error := .error | default true }}
+
+{{ $image := $page.Resources.GetMatch (printf "%s" ($destination | safeURL)) }}
+{{ if not $image }}
+  {{ $image = resources.Get $destination }}
+  {{ if and (not $image) (eq $error true) }}
+    {{ errorf "%s: Image '%s' not found." $page.RelPermalink $destination }}
+  {{ end }}
+{{ end }}
+{{ return $image }}

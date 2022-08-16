@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ .Permalink }}</title>
+    <link rel="canonical" href="{{ .Permalink }}"/>
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8"/>
+    <noscript>
+        <meta http-equiv="refresh" content="0; url={{ .Permalink }}"/>
+    </noscript>
+    <script>
+      ;(function () {
+        var getFirstBrowserLanguage = function () {
+          var nav = window.navigator,
+          browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'],
+          i,
+          language;
+
+          if (Array.isArray(nav.languages)) {
+            for (i = 0; i < nav.languages.length; i++) {
+              language = nav.languages[i];
+              if (language && language.length) {
+                return language;
+              }
+            }
+          }
+
+          // support for other well known properties in browsers
+          for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
+            language = nav[browserLanguagePropertyKeys[i]];
+            if (language && language.length) {
+              return language;
+            }
+          }
+          return '{{ site.Sites.First.Language }}';
+        }
+
+        var preferLang = getFirstBrowserLanguage();
+        console.log(preferLang);
+        var availableLangs = [
+          {{- range site.Sites -}}
+            '{{ .Language }}',
+          {{- end -}}
+        ];
+
+        var newLocation = '{{ .Permalink | safeHTML }}';
+        if (availableLangs.indexOf(preferLang) !== -1) {
+          newLocation = newLocation.replace('/{{ site.Sites.First.Language }}/', `/${preferLang}/`);
+        }
+        window.location.replace(newLocation);
+      })();
+    </script>
+</head>
+<body>
+  <h1>This Page Has Moved!</h1>
+  <p>
+    For one reason or another — Web address typos and site reorganization are
+    <em>very</em> likely — "Setting up Raku with Rakubrew" moved to a new address.
+  </p>
+  <p>
+    If your browser does not immediately send you to the new location,
+    you can visit <a href="{{ .Permalink }}">{{ .Permalink }}</a> yourself.
+  </p>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{{ $author := .Page.Params.author }}
+{{ $authorData := index .Site.Data.authors (printf "%s" $author) }}
+{{ $imageSize := 100 }}
+{{ $imageFactor := 0.75 }}
+{{ if $authorData.page }}
+{{ $profil := site.GetPage $authorData.page }}
+{{ with $profil }}
+{{ if .Params.profil }}
+<section class="sidecar author">
+  <header>
+    <h1>{{ T "sidebar-title-author" }}</h1>
+  </header>
+  <a href="{{ $profil.RelPermalink }}" title="{{ $profil.LinkTitle }}">
+    {{ $destination := .Params.avatar }}
+    {{ if and (not $destination) ($authorData.mail) }}
+      {{ $destination = printf "https://www.gravatar.com/avatar/%s?d=identicon&s=%d" (md5 $authorData.mail) $imageSize }}
+    {{ end }}
+
+    {{ if $destination }}
+      {{ partial "image/picture/render" (
+        dict
+        "destination" ($destination | safeHTML )
+        "mode" "fill"
+        "class" "round"
+        "page" .Page
+        "text" ($authorData.displayName | default .Site.Title)
+        "title" ($authorData.displayName | default .Site.Title)
+        "hidecaption" true
+        "hidecopyright" true
+        "width" (dict
+          "MD" (.Page.Site.Params.Theme.Avatar.MD | default (int (mul $imageSize $imageFactor)))
+          "XL" (.Page.Site.Params.Theme.Avatar.XL | default $imageSize)
+        )
+        "height" (dict
+          "MD" (.Page.Site.Params.Theme.AvatarRatio.MD | default (int (mul $imageSize $imageFactor)))
+          "XL" (.Page.Site.Params.Theme.AvatarRatio.XL | default $imageSize)
+        )
+      ) }}
+    {{ end }}
+    {{ .Params.profil | markdownify | safeHTML }}
+  </a>
+</section>
+{{ end }}
+{{ end }}
+{{ end }}

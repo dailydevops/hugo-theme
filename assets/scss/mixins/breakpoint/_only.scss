@@ -1,0 +1,24 @@
+@mixin breakpoint-only($name, $breakpoints: $theme-breakpoints) {
+  $prev: breakpoint-prev($name, $breakpoints);
+  $min:  breakpoint-min($prev, $breakpoints);
+  $next: breakpoint-next($name, $breakpoints);
+  $max:  breakpoint-max($name, $breakpoints);
+
+  @if $prev != null and $next != null {
+    @if $min != null {
+      @media (min-width: $min) and (max-width: $max) {
+        @content;
+      }
+    }
+    @else if $min == null {
+      @media (max-width: $max) {
+        @content;
+      }
+    }
+  }
+  @else if $next == null {
+    @media (min-width: breakpoint-min($prev, $breakpoints)) {
+      @content;
+    }
+  }
+}

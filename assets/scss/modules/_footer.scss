@@ -1,0 +1,35 @@
+.footer {
+  background: $theme-color-white;
+  display: flex;
+  flex-wrap: wrap;
+
+  @include breakpoint-down(md) {
+    padding: $theme-spacer-below;
+  }
+
+  @include breakpoint-up(md) {
+    flex: 1 0 90%;
+    padding: 0 $theme-spacer-above $theme-spacer-above;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  .navigation {
+    display: flex;
+    flex: 1 0 90%;
+    flex-direction: row-reverse;
+    font-size: .75rem;
+  }
+}
+
+.copyright {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 0 90%;
+  background-color: $theme-accent-dark-grey;
+  color: $theme-color-white;
+  padding: .375rem;
+  font-size: .75rem;
+}

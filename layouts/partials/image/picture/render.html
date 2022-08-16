@@ -1,0 +1,78 @@
+{{ $placeholder := "images/placeholder.png"}}
+{{ $destination := .destination | default $placeholder }}
+{{ $page := .page }}
+
+{{ $isRemote := strings.HasPrefix $destination "http" }}
+
+{{ $image := false }}
+{{ $copyright := false }}
+{{ if not $isRemote }}
+  {{ $image = (partial "function/getImage" (dict "destination" $destination "page" $page)) }}
+  {{ $copyright = (partial "function/getCopyright" (dict "image" $image "page" $page)) }}
+{{ end }}
+
+{{ $mode := .mode | default "resize" }}
+{{ $caption := .title | default "" }}
+{{ $class := .class }}
+{{ $alt := .text | default ($caption | plainify) }}
+{{ $width := .width }}
+{{ $height := .height | default (dict "XS" 0 "SM" 0 "MD" 0 "LG" 0 "XL" 0 "XXL" 0)}}
+{{ $breakpoints := (partial "function/getBreakpoints" .) }}
+{{ $hidecaption := .hidecaption | default false }}
+{{ $hidecopyright := .hidecopyright | default false }}
+{{ $lazy := .lazy | default true }}
+
+{{ $captionWithCopyright := $caption }}
+{{ if $copyright }}
+{{ if $captionWithCopyright }}
+{{ $captionWithCopyright = printf "%s | %s" $captionWithCopyright $copyright }}
+{{ else }}
+{{ $captionWithCopyright = $copyright }}
+{{ end }}
+{{ end }}
+
+{{ $url := $destination }}
+<figure{{ with $class }} class="{{ . }}"{{ end }}>
+  <picture>
+    {{ if not $isRemote }}
+      {{ if and ($image) (ne $image.MediaType.SubType "svg") ($width) }}
+        {{ $ext := path.Ext $image.Name }}
+        {{ $base := strings.TrimSuffix $ext $image.RelPermalink }}
+
+        {{ if (eq $destination $placeholder) }}
+          {{ partial "function/throwError" (printf "%s: Invalid Placeholder in use." $page.RelPermalink) }}
+        {{ else }}
+          {{ if (ge $width.XL $image.Width) }}
+            {{ partial "function/throwError" (printf "%s: Image '%s' to small (Width)." $page.RelPermalink $image.RelPermalink) }}
+          {{ end }}
+        {{ end }}
+
+        {{ if not ($page.Scratch.Get "deleteme") }}
+            {{ $page.Scratch.Set "deleteme" (slice) }}
+        {{ end }}
+
+        {{ $internalImage := $image}}
+        {{ if eq $mode "fill" }}
+          {{ $internalImage = $image.Fill (printf "%dx%d" $width.XL $height.XL) }}
+          {{ $page.Scratch.Add "deleteme" $internalImage.RelPermalink }}
+          {{ $internalImage = slice $internalImage | resources.Concat (printf "%s-%dx%d%s" $base $width.XL $height.XL $ext) }}
+        {{ end }}
+
+        {{ $params := (dict "page" $page "base" $base "ext" $ext "image" $internalImage) }}
+        {{ if isset $width "XS" }}{{ partial "image/picture/source" (merge $params (dict "width" $width.XS "breakpoint" (partial "function/getBreakpointOrNil" (dict "b" $breakpoints.XS "w1" $internalImage.Width "w2" $width.SM )))) }}{{ end }}
+        {{ if isset $width "SM" }}{{ partial "image/picture/source" (merge $params (dict "width" $width.SM "breakpoint" (partial "function/getBreakpointOrNil" (dict "b" $breakpoints.SM "w1" $internalImage.Width "w2" $width.MD )))) }}{{ end }}
+        {{ if isset $width "MD" }}{{ partial "image/picture/source" (merge $params (dict "width" $width.MD "breakpoint" (partial "function/getBreakpointOrNil" (dict "b" $breakpoints.MD "w1" $internalImage.Width "w2" $width.LG )))) }}{{ end }}
+        {{ if isset $width "LG" }}{{ partial "image/picture/source" (merge $params (dict "width" $width.LG "breakpoint" (partial "function/getBreakpointOrNil" (dict "b" $breakpoints.LG "w1" $internalImage.Width "w2" $width.XL )))) }}{{ end }}
+        {{ partial "image/picture/source" (merge $params (dict "width" $width.XL "breakpoint" nil)) }}
+      {{ end }}
+      {{ $url = printf "%s?v=%s" $image.RelPermalink (md5 $image.Content) }}
+    {{ end }}
+    <img src="{{ $url }}" alt="{{ $alt }}"{{ if eq $lazy true}} loading="lazy"{{ end }}{{ with $captionWithCopyright }} title="{{ . | safeHTML }}"{{ end }}/>
+  </picture>
+  {{ if not $hidecopyright }}{{ with $copyright }}
+  <footer><small>{{ . | safeHTML }}</small></footer>
+  {{ end }}{{ end }}
+  {{ if not $hidecaption }}{{ with $caption }}
+  <figcaption>{{ . | safeHTML }}</figcaption>
+  {{ end }}{{ end }}
+</figure>

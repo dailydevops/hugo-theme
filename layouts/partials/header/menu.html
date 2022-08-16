@@ -1,0 +1,17 @@
+{{ if .Site.Menus.main }}
+<nav class="menu">
+	<button class="burger" aria-haspopup="true" aria-expanded="false" tabindex="0">
+    <i class="fa-solid fa-burger"></i>
+	</button>
+	<ul class="navigation">
+		{{ $currentNode := . }}
+		{{ range .Site.Menus.main }}
+		{{ if .Name }}
+		<li{{ if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} class="active"{{ end }}>
+			<a href="{{ .URL }}">{{ .Pre }}{{ .Name }}{{ .Post }}</a>
+		</li>
+		{{ end }}
+		{{ end }}
+	</ul>
+</nav>
+{{ end }}

@@ -1,0 +1,22 @@
+{{ if .Params.hero }}
+{{ partial "image/picture/render" (
+  dict
+  "destination" .Params.hero
+  "mode" "fill"
+  "class" "square"
+  "page" .Page
+  "title" .Page.Title
+  "hidecaption" true
+  "hidecopyright" true
+  "lazy" false
+  "width" (dict
+      "SM" (.Page.Site.Params.Theme.Summary.SM | default 80)
+      "XL" (.Page.Site.Params.Theme.Summary.XL | default 250)
+    )
+  "height" (dict
+      "SM" (.Page.Site.Params.Theme.SummaryHeight.SM | default 80)
+      "XL" (.Page.Site.Params.Theme.SummaryHeight.XL | default 250)
+    )
+  )
+}}
+{{ end }}

@@ -1,0 +1,3 @@
+@function breakpoint-infix($name, $breakpoints: $theme-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}

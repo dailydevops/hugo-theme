@@ -1,0 +1,15 @@
+{{ define "main" }}
+<main class="board" role="main">
+  {{- with .Title }}
+  <header>
+    <h1>{{ . }}</h1>
+  </header>
+  {{- end }}
+  {{- with .Content }}
+  {{ partial "content" . }}
+  {{- end }}
+  {{- range sort (index .Site.Taxonomies .Type) ".Page.Title" "asc" }}
+    {{ partial "taxonomy/card" .Page }}
+  {{- end }}
+</main>
+{{ end }}

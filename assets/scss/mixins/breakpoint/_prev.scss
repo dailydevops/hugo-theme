@@ -1,0 +1,5 @@
+@function breakpoint-prev($name, $breakpoints: $theme-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+  $n: index($breakpoint-names, $name);
+  $nm: $n - 1;
+  @return if($nm > 0 and $n <= length($breakpoint-names), nth($breakpoint-names, $nm), null);
+}

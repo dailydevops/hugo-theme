@@ -1,0 +1,9 @@
+{{ $noJs := resources.Get "js/noJs.js" }}
+{{ $js := slice $noJs | resources.Concat "js/above.js" }}
+{{ if .Site.IsServer }}
+{{ $js = $js | fingerprint "sha512" }}
+<script async defer src="{{ $js.RelPermalink }}"></script>
+{{ else }}
+{{ $js = $js | minify | fingerprint "sha512" }}
+<script async defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}

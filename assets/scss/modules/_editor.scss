@@ -1,0 +1,40 @@
+aside.draft {
+  flex: 0 0 100%;
+  border: 1px solid $theme-color-secondary;
+  border-radius: 25px;
+  padding: 25px;
+
+  .focus {
+    color: #F40;
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  ul {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+  }
+
+  li {
+    flex: 0 0 30%;
+    font-size: 12px;
+
+    &.head {
+      flex: 0 0 100%;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    &.grow {
+      flex: 1 0 60%;
+    }
+  }
+}
+
+span.draft {
+  font-size: .75em;
+  color: #F40;
+  font-weight: 700;
+  text-transform: uppercase;
+}

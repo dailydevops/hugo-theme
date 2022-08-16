@@ -1,0 +1,58 @@
+figure {
+  margin: 0 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+
+  picture {
+    flex: 0 0 100%;
+    order: 1;
+  }
+
+  img {
+    display: block;
+  }
+
+  footer {
+    flex: 1 0 45%;
+    order: 3;
+    text-align: right;
+  }
+}
+
+figcaption {
+  margin: .25rem 0 0;
+  color: $theme-color-secondary;
+  font-style: italic;
+  flex: 1 0 45%;
+  order: 2;
+}
+
+.hero {
+  flex: 0 0 100%;
+  margin: 0;
+}
+
+.page-logo {
+  margin: 0;
+  @include breakpoint-down(md) {
+    max-width: 4rem;
+  }
+
+  @include breakpoint-up(md) {
+    max-width: 8rem;
+  }
+}
+
+.round {
+  border-radius: 50%;
+  border: 1px $theme-color-primary solid;
+
+  img, picture {
+    border-radius: inherit;
+  }
+}
+
+.square {
+  float: left;
+  margin: 0 20px 0 0;
+}

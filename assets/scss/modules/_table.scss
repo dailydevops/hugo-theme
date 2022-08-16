@@ -1,0 +1,37 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: $theme-table-border-style;
+  border-left: $theme-table-border-style;
+
+  &.striped {
+    & > tbody > tr:nth-child(odd) {
+      background-color: $theme-table-background-color;
+    }
+  }
+
+  &.row {
+    & > tbody > tr:last-child {
+      background-color: transparent;
+      border-top: double $theme-thead-border-color;
+      font-weight: 700;
+    }
+  }
+}
+
+td,
+th {
+  padding: 7px 10px;
+  border-right: $theme-table-border-style;
+  border-bottom: $theme-table-border-style;
+}
+
+th {
+  font-weight: 700;
+}
+
+thead > tr {
+  &:where(:only-child, :last-child) > th {
+    border-bottom: 1px solid $theme-thead-border-color;
+  }
+}

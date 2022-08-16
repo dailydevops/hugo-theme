@@ -1,0 +1,24 @@
+atom:
+  name: atom
+  mediaType: application/atom+xml
+  baseName: feed
+  isPlainText: false
+  rel: alternate
+  isHTML: false
+  noUgly: true
+  permalinkable: false
+rss:
+  name: rss
+  mediaType: application/rss+xml
+  baseName: feed
+  isPlainText: true
+  rel: alternate
+  isHTML: false
+  noUgly: false
+  permalinkable: false
+deleteme:
+  name: deleteme
+  mediaType: text/deleteme
+  baseName: index
+  isPlainText: true
+  notAlternative: true

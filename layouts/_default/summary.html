@@ -1,0 +1,15 @@
+{{ $imageTemplate := "image/summary" }}
+{{ $class := "post clearfix" }}
+{{ if and (eq .Type "posts") (not .NextInSection) }}
+  {{ $imageTemplate = "image/hero" }}
+  {{ $class = printf "%s %s" $class "first" }}
+{{ end }}
+<article class="{{ $class }}">
+  {{ partial $imageTemplate . }}
+  <header>
+		<h2>
+			<a href="{{ .RelPermalink }}" rel="bookmark">{{ .Title | safeHTML }}</a>
+		</h2>
+	</header>
+  {{ partial "content" .Summary }}
+</article>

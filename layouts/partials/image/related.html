@@ -1,0 +1,18 @@
+{{ partial "image/picture/render" (
+  dict
+  "destination" .Params.hero
+  "mode" "fill"
+  "class" "square"
+  "page" .Page
+  "title" .Page.Title
+  "hidecaption" true
+  "hidecopyright" true
+  "lazy" false
+  "width" (dict
+    "XL" (.Page.Site.Params.Theme.Hero.XL | default 80)
+  )
+  "height" (dict
+    "XL" (.Page.Site.Params.Theme.HeroRatio.XL | default 80)
+    )
+  )
+}}

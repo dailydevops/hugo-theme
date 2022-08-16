@@ -1,0 +1,78 @@
+# Translations
+- id: navigation-next
+  translation: Next
+- id: navigation-prev
+  translation: Previous
+- id: pagination-title
+  translation: "{{ .Title }} &mdash; Page {{ .Page }}"
+# SHARE
+- id: share-facebook
+  translation: Share on Facebook
+- id: share-linkedin
+  translation: Share on LinkedIn
+- id: share-reddit
+  translation: Share on Reddit
+- id: share-twitter
+  translation: Share on Twitter
+- id: share-xing
+  translation: Share on Xing
+# SIDEBAR Social
+- id: sidebar-social-github
+  translation: Follow me on GitHub
+- id: sidebar-social-github-us
+  translation: Follow us on GitHub
+- id: sidebar-social-gitlab
+  translation: Follow me on GitLab
+- id: sidebar-social-gitlab-us
+  translation: Follow us on GitLab
+- id: sidebar-social-linkedin
+  translation: Follow me on LinkedIn
+- id: sidebar-social-linkedin-us
+  translation: Follow us on LinkedIn
+- id: sidebar-social-stackoverflow
+  translation: Follow me on Stack Overflow
+- id: sidebar-social-stackoverflow-us
+  translation: Follow us on Stack Overflow
+- id: sidebar-social-twitter
+  translation: Follow me on Twitter
+- id: sidebar-social-twitter-us
+  translation: Follow us on Twitter
+# SIDEBAR Title
+- id: sidebar-title-author
+  translation: Author
+- id: sidebar-title-categories
+  translation: Categories
+- id: sidebar-title-language
+  translation: Available translations
+- id: sidebar-title-links
+  translation: Additional links
+- id: sidebar-title-related
+  translation: Related content
+- id: sidebar-title-series
+  translation: Series content
+- id: sidebar-title-share
+  translation: Share my content
+- id: sidebar-title-share-us
+  translation: Share our content on
+- id: sidebar-title-social
+  translation: Follow me on
+- id: sidebar-title-social-us
+  translation: Follow us on
+- id: sidebar-title-tags
+  translation: Tags
+- id: sidebar-title-toc
+  translation: Table of Content
+# 404
+- id: 404-title
+  translation: 404. page not found
+- id: 404-text
+  translation: The page you are looking for does not exist, has been moved or deleted.
+- id: 404-linktext
+  translation: Homepage
+# Example
+- id: example-title-markdown
+  translation: Representation as Markdown
+- id: example-title-rendered
+  translation: Rendered representation
+- id: example-title-shortcodes
+  translation: Representation as Shortcode

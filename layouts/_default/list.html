@@ -1,0 +1,17 @@
+{{ define "main" }}
+<main class="list" role="main">
+  {{- with .Title }}
+  <header>
+    <h1>{{ . }}</h1>
+  </header>
+  {{- end }}
+  {{- with .Content }}
+  {{ partial "content" . }}
+  {{- end }}
+  {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" (partial "function/getMainSections" .)) }}
+  {{- range $paginator.Pages }}
+    {{- .Render "summary" }}
+  {{- end }}
+</main>
+{{ partial "pagination" . }}
+{{ end }}

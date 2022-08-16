@@ -1,0 +1,11 @@
+{{ $related := .Site.RegularPages.Related . | first 3 }}
+{{ with $related }}
+<section class="sidecar related">
+  <header>
+    <h1>{{ T "sidebar-title-related" }}</h1>
+  </header>
+  {{ range . }}
+    {{ .Render "related" }}
+  {{ end }}
+</section>
+{{ end }}

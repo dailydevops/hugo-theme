@@ -1,0 +1,9 @@
+{{ define "main" }}
+{{ partial "image/hero" . }}
+<article class="post">
+  <header>
+    <h1>{{ .Title | safeHTML }}</h1>
+  </header>
+  {{ partial "content" .Content }}
+</article>
+{{ end }}

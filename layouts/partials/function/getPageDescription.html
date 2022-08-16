@@ -1,0 +1,14 @@
+{{ $description := .Page.Scratch.Get "head-description" | default nil }}
+{{ if not ($description)}}
+  {{ $description = .Description }}
+  {{ if or (.IsPage) (.IsSection) }}
+    {{ if .Summary }}
+      {{ $description = .Summary }}
+    {{ else if .Site.Params.description }}
+      {{ $description = .Site.Params.description }}
+    {{ end }}
+  {{ end }}
+  {{ $description = ($description | truncate 160) }}
+  {{ .Page.Scratch.Set "head-description" $description }}
+{{ end }}
+{{ return $description }}

@@ -1,0 +1,7 @@
+{{ $message := . }}
+{{ $disableBuildErros := site.Params.disableBuildErros | default false }}
+{{ if and (not $disableBuildErros) (not site.IsServer)}}
+{{ errorf $message}}
+{{ else }}
+{{ warnf $message }}
+{{ end }}

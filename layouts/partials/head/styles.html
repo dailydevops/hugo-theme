@@ -1,0 +1,10 @@
+{{ $styleOptions := (dict "enableSourceMap" true "includePaths" (slice "node_modules/the-new-css-reset/css" "node_modules/@fortawesome/fontawesome-free/css")) }}
+{{ $styles := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate "css/style.scss" . | toCSS $styleOptions | postCSS }}
+
+{{ if .Site.IsServer }}
+  {{ $styles = $styles | fingerprint "sha512" }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}"/>
+{{ else }}
+  {{ $styles = $styles | minify | fingerprint "sha512" | resources.PostProcess }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous"/>
+{{ end }}

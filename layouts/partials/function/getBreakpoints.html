@@ -1,0 +1,12 @@
+{{ $breakpoints := .Page.Scratch.Get "breakpoints" | default nil }}
+{{ if not ($breakpoints) }}
+  {{ $breakpoints = (dict
+    "XS" (.Page.Site.Params.Theme.Breakpoint.SM | default 576)
+    "SM" (.Page.Site.Params.Theme.Breakpoint.MD | default 768)
+    "MD" (.Page.Site.Params.Theme.Breakpoint.LG | default 992)
+    "LG" (.Page.Site.Params.Theme.Breakpoint.XL | default 1200)
+    "XL" (.Page.Site.Params.Theme.Breakpoint.XXL | default 1600)
+    ) }}
+  {{ .Page.Scratch.Set "breakpoints" $breakpoints }}
+{{ end }}
+{{ return $breakpoints }}

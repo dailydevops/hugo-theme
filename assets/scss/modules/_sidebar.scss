@@ -1,0 +1,143 @@
+@import "../mixins/breakpoint";
+
+.sidebar {
+  flex: 0 0 percentage($theme-content-sidebar-columns / $theme-content-columns);
+  order: 2;
+  display: flex;
+  flex-direction: column;
+
+  &.left {
+    order: 0;
+  }
+
+  @include breakpoint-down($theme-breakpoint-sidebar-max) {
+    gap: .25rem;
+    order: 10 !important;
+    flex-basis: 100%;
+  }
+
+  @include breakpoint-up($theme-breakpoint-sidebar-max) {
+    gap: .75rem;
+    &.divider {
+      border: 0;
+    }
+  }
+}
+
+.sidecar {
+  & > header {
+    flex: 0 0 100%;
+    margin-bottom: .5rem;
+
+    & > h1 {
+      color: $theme-color-primary;
+      font-size: 1.25rem;
+    }
+  }
+
+  @include breakpoint-up($theme-breakpoint-sidebar-max) {
+    padding: .5rem;
+  }
+
+  &.share > header {
+    @include breakpoint-up($theme-breakpoint-sidebar-max) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
+
+.author {
+  .round {
+    float: right;
+    margin: 0 0 .75rem .75rem;
+  }
+}
+
+.sidebar.left {
+  .round {
+    float: left;
+    margin: 0 .75rem .75rem 0;
+  }
+}
+
+.links {
+  a {
+    display: block;
+
+    &>i {
+      font-size: .75em;
+    }
+  }
+}
+
+.series {
+  ol {
+    list-style: decimal inside;
+  }
+
+  li {
+    position: relative;
+
+    a {
+      position: absolute;
+      margin-left: .625rem;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .overview {
+    display: block;
+  }
+}
+
+.tags {
+  font-size: .75rem;
+  line-height: 1;
+
+  ul {
+    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  a {
+    color: inherit;
+    display: inherit;
+    padding: .1875rem .375rem;
+    margin: .25rem .375rem;
+  }
+
+  .category,
+  .tag {
+    border-radius: 10px;
+
+    &:hover {
+      color: $theme-color-white;
+      background-color: $theme-color-primary;
+    }
+  }
+
+  .category {
+    color: $theme-color-white;
+    background-color: $theme-color-tertiary;
+  }
+
+  .tag {
+    color: $theme-color-tertiary;
+    background-color: $theme-color-secondary;
+  }
+}
+
+.toc {
+  ul, li {
+    display: flex;
+    gap: .375rem;
+    flex-direction: column;
+  }
+
+  li > ul {
+    margin-left: .75rem;
+  }
+}

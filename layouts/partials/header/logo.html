@@ -1,0 +1,23 @@
+{{ $logoTitle := .Site.Params.logo.title | default .Site.Title }}
+{{ $logoImage := .Site.Params.logo.image }}
+
+{{ if or $logoTitle $logoImage }}
+<a class="logo" href="{{ "" | relLangURL }}"{{ with $logoTitle }} title="{{ . }}"{{ end }} rel="home">
+  {{ if $logoImage }}
+    {{ $logo := (partial "function/getImage" (dict "destination" $logoImage "page" .Page)) | resources.ExecuteAsTemplate "logo.svg" . }}
+    {{ if (ne $logo.MediaType.SubType "svg") }}
+      {{ errorf "%s: Invalid logo format. Only svg allowed." $logo.RelPermalink }}
+    {{ end }}
+    {{ if $logo }}
+    <figure class="page-logo">
+      <picture>
+        <img src="{{ $logo.RelPermalink }}?v={{ md5 $logo.Content }}" alt="DEV - Daily DevOps .NET" title="DEV - Daily DevOps .NET">
+      </picture>
+    </figure>
+    {{ end }}
+  {{ end }}
+  {{ with $logoTitle }}
+  <h1 class="title">{{ . }}</h1>
+  {{ end }}
+</a>
+{{ end }}

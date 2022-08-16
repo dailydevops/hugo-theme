@@ -1,0 +1,4 @@
+@function breakpoint-max($name, $breakpoints: $theme-breakpoints) {
+  $max: map-get($breakpoints, $name);
+  @return if($max and $max > 0, $max - .02, null);
+}

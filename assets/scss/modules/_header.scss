@@ -1,0 +1,115 @@
+@import "../mixins/breakpoint";
+
+.header {
+  background: $theme-color-white;
+  display: flex;
+  flex-wrap: wrap;
+
+  .divider {
+    @include breakpoint-down(md) {
+      margin: 0 $theme-spacer-below;
+    }
+
+    @include breakpoint-up(md) {
+      margin: 0 $theme-spacer-above;
+    }
+  }
+}
+
+.logo {
+  display: flex;
+  flex: 1 0 65%;
+  align-items: center;
+
+  @include breakpoint-down(md) {
+    padding: $theme-spacer-below $theme-spacer-below 0;
+    gap: .5rem;
+    .title {
+      font-size: 1.25rem;
+    }
+  }
+
+  @include breakpoint-up(md) {
+    padding: $theme-spacer-above $theme-spacer-above 0;
+    gap: 1.5rem;
+    .title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .title {
+    line-height: 1;
+    color: $theme-color-primary;
+  }
+}
+
+.menu {
+  @include breakpoint-down(md) {
+    padding: $theme-spacer-below;
+  }
+
+  @include breakpoint-up(md) {
+    flex: 1 0 90%;
+    margin: 0 $theme-spacer-above;
+  }
+
+  .burger {
+    display: block;
+    color: $theme-color-black;
+    font-size: 4rem;
+    line-height: 1;
+    @include breakpoint-up(md) {
+      display: none;
+      visibility: hidden;
+    }
+
+    &.active {
+      color: $theme-color-primary;
+    }
+  }
+
+  .navigation {
+    @include breakpoint-down(md) {
+      position: absolute;
+      left: $theme-spacer-below;
+      right: $theme-spacer-below;
+      margin-top: -2px;
+      z-index: 1;
+      visibility: hidden;
+
+      &.active {
+        visibility: visible;
+
+        a {
+          font-size: 1.25em;
+        }
+      }
+    }
+
+    @include breakpoint-up(md) {
+      display: flex;
+    }
+  }
+}
+
+.navigation {
+  list-style: none;
+  background-color: $theme-accent-dark-grey;
+
+  & li.active {
+    background: $theme-color-primary;
+  }
+
+  & li:hover {
+    background: $theme-color-secondary;
+  }
+
+  & a {
+    color: $theme-color-white;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: flex;
+    padding: .5rem .875rem;
+    gap: .25rem;
+  }
+}

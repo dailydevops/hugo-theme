@@ -1,0 +1,11 @@
+<article class="post">
+  {{ partial "image/related" . }}
+  <header>
+		<h2>
+			<a href="{{ .RelPermalink }}" rel="bookmark">
+			{{ .Title | safeHTML }}
+			</a>
+		</h2>
+	</header>
+  {{ partial "content" .Summary }}
+</article>

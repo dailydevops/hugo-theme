@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="HandheldFriendly" content="true"/>
+<meta name="MobileOptimized" content="320"/>
+
+{{ $title := (partial "function/getPageTitle" . )}}
+<title>{{ $title | safeHTML }}</title>
+
+{{ with (partial "function/getPageDescription" . )}}
+<meta name="description" content="{{ . | plainify | safeHTML }}">
+{{ end }}
+
+{{ with (partial "function/getPageAuthorObject" . )}}
+<meta name="author" content="{{ .displayName }}">
+{{ end }}
+
+{{ if .Site.Params.logo.image }}
+{{ $logo := (partial "function/getImage" (dict "destination" .Site.Params.logo.image "page" .Page)) | resources.ExecuteAsTemplate "logo.svg" . }}
+{{ if (ne $logo.MediaType.SubType "svg") }}
+  {{ errorf "%s: Invalid logo format. Only `.svg` allowed." $logo.RelPermalink }}
+{{ end }}
+<link rel="icon" href="{{ $logo.RelPermalink }}?v={{ md5 $logo.Content }}" sizes="any" type="{{ $logo.MediaType.Type | safeHTML }}">
+{{ end }}

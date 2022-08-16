@@ -1,0 +1,87 @@
+{{ $author := .Page.Params.author }}
+
+{{ if not $author }}
+{{ partial "function/throwError" (printf "%s: No author was given." .Page.RelPermalink) }}
+{{ end }}
+
+{{ $authorData := index .Site.Data.authors (printf "%s" $author) }}
+
+{{ if and (not $authorData) ($author) }}
+  {{ errorf "%s: Unknown author '%s'." .Page.RelPermalink $author }}
+{{ end }}
+
+{{ $social := $authorData.social }}
+{{ $isdefault := $authorData.isdefault | default false }}
+{{ if $social }}
+<section class="sidecar social">
+  <header>
+    <h1>{{ if $isdefault }}{{ T "sidebar-title-social-us" }}{{ else }}{{ T "sidebar-title-social" }}{{ end }}</h1>
+  </header>
+  {{ range $k, $v := $social }}
+  {{ if eq $k "linkedin" }}
+  <a
+    class="icon linkedin"
+    href="https://www.linkedin.com/in/{{ $v }}"
+    rel="noopener external"
+    title="{{ if $isdefault }}{{ T "sidebar-social-linkedin-us" }}{{ else }}{{ T "sidebar-social-linkedin" }}{{ end }}"
+    target="_blank"
+    ><span class="fa-stack fa-fw fa-1x">
+      <i class="fa-solid fa-circle fa-stack-2x"></i>
+      <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+    </span></a>
+  {{ else if eq $k "xing" }}
+  <a
+    class="icon xing"
+    href="https://www.xing.com/profile/{{ $v }}"
+    rel="noopener external"
+    title="{{ if $isdefault }}{{ T "sidebar-social-xing-us" }}{{ else }}{{ T "sidebar-social-xing" }}{{ end }}"
+    target="_blank"
+    ><span class="fa-stack fa-fw fa-1x">
+      <i class="fa-solid fa-circle fa-stack-2x"></i>
+      <i class="fab fa-xing fa-stack-1x fa-inverse"></i>
+    </span></a>
+  {{ else if eq $k "twitter" }}
+  <a
+    class="icon twitter"
+    href="https://twitter.com/{{ $k }}"
+    rel="noopener external"
+    title="{{ if $isdefault }}{{ T "sidebar-social-twitter-us" }}{{ else }}{{ T "sidebar-social-twitter" }}{{ end }}"
+    target="_blank"
+    ><span class="fa-stack fa-fw fa-1x">
+      <i class="fa-solid fa-circle fa-stack-2x"></i>
+      <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+    </span></a>
+  {{ else if eq $k "github" }}
+  <a
+    class="icon github"
+    href="https://github.com/{{ $v }}"
+    rel="noopener external"
+    title="{{ if $isdefault }}{{ T "sidebar-social-github-us" }}{{ else }}{{ T "sidebar-social-github" }}{{ end }}"
+    target="_blank"
+    ><i class="fa-brands fa-fw fa-github fa-2x"></i></a>
+  {{ else if eq $k "gitlab" }}
+  <a
+    class="icon gitlab"
+    href="https://gitlab.com/{{ $v }}"
+    rel="noopener external"
+    title="{{ if $isdefault }}{{ T "sidebar-social-gitlab-us" }}{{ else }}{{ T "sidebar-social-gitlab" }}{{ end }}"
+    target="_blank"
+    ><span class="fa-stack fa-fw fa-1x">
+      <i class="fa-solid fa-circle fa-stack-2x"></i>
+      <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
+    </span></a>
+  {{ else if eq $k "stackoverflow" }}
+  <a
+    class="icon stackoverflow"
+    href="https://stackoverflow.com/users/{{ $v }}"
+    rel="noopener external"
+    title="{{ if $isdefault }}{{ T "sidebar-social-stackoverflow-us" }}{{ else }}{{ T "sidebar-social-stackoverflow" }}{{ end }}"
+    target="_blank"
+    ><span class="fa-stack fa-fw fa-1x">
+      <i class="fa-solid fa-circle fa-stack-2x"></i>
+      <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+    </span></a>
+  {{ end }}
+  {{ end }}
+</section>
+{{ end }}

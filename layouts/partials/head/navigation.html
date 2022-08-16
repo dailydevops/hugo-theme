@@ -1,0 +1,19 @@
+{{ $title := partial "function/getPageTitle" . | plainify | safeHTML}}
+<link rel="canonical" href="{{ .Permalink | absLangURL }}" hreflang="{{ $.Site.LanguageCode | lower }}" title="{{ $title }}"/>
+<link rel="home" href="{{ "" | absLangURL }}" hreflang="{{ $.Site.LanguageCode | lower }}" title="{{ .Site.Title }}"/>
+{{ if .IsPage }}
+{{ if .NextInSection }}
+<link rel="next" href="{{ .NextInSection.Permalink }}" hreflang="{{ $.Site.LanguageCode | lower }}" title="{{ .NextInSection.Title }}"/>
+{{ end }}
+{{ if .PrevInSection }}
+<link rel="prev" href="{{ .PrevInSection.Permalink }}" hreflang="{{ $.Site.LanguageCode | lower }}" title="{{ .PrevInSection.Title }}"/>
+{{ end }}
+{{ else if or .IsHome .IsSection }}
+{{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" (partial "function/getMainSections" .)) }}
+{{ if $paginator.HasNext }}
+<link rel="next" href="{{ $paginator.Next.URL | absURL }}" hreflang="{{ $.Site.LanguageCode | lower }}" title="{{ T "pagination-title" (dict "Title" $title "Page" $paginator.Next.PageNumber) | safeHTML }}" />
+{{ end }}
+{{ if $paginator.HasPrev }}
+<link rel="prev" href="{{ $paginator.Prev.URL | absURL }}" hreflang="{{ $.Site.LanguageCode | lower }}" title="{{ T "pagination-title" (dict "Title" $title "Page" $paginator.Prev.PageNumber) | safeHTML }}"/>
+{{ end }}
+{{ end }}

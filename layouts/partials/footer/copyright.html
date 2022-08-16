@@ -1,0 +1,6 @@
+{{ $year := now.Year }}
+{{ $since := site.Params.copyright.since }}
+{{ if and ($since) (lt $since $year) }}
+{{ $year = (printf "%d - %d" $since $year) }}
+{{ end }}
+<div class="copyright">&copy; {{ $year }} {{ .Site.Params.copyright.text | default .Site.Title }}</div>

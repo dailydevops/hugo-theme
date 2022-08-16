@@ -1,0 +1,4 @@
+{{ $message := . }}
+{{ if site.IsServer }}
+{{ warnf $message }}
+{{ end }}

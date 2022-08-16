@@ -1,0 +1,17 @@
+{{ partial "image/picture/render" (
+  dict
+  "destination" .Destination
+  "mode" "resize"
+  "class" "responsive"
+  "page" .Page
+  "title" .Title
+  "text" .Text
+  "width" (dict
+      "XS" (.Page.Site.Params.Theme.Image.XS | default 544)
+      "SM" (.Page.Site.Params.Theme.Image.SM | default 672)
+      "MD" (.Page.Site.Params.Theme.Image.MD | default 896)
+      "LG" (.Page.Site.Params.Theme.Image.LG | default 1104)
+      "XL" (.Page.Site.Params.Theme.Image.XL | default 1444)
+    )
+  )
+}}

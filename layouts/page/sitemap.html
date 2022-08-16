@@ -1,0 +1,7 @@
+<ul>
+  {{ range sort .Site.Pages "RelPermalink" "asc" }}
+  <li>
+  {{ printf "%#v" .RelPermalink }}
+  </li>
+  {{ end }}
+</ul>

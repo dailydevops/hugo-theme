@@ -1,0 +1,38 @@
+{{ if .Params.tags }}
+
+{{ $currentPage := . }}
+{{ $currentPage.Scratch.Set "page-tags" (slice) }}
+{{ range .Params.tags }}
+{{ if . }}
+  {{ $path := printf "/tags/%s/" (. | urlize) }}
+  {{ $ct := $currentPage.Site.GetPage $path }}
+  {{ if not $ct }}{{ partial "function/throwError" $path }}{{ end }}
+  {{ if or (not $ct.Params.draft) ($currentPage.Site.IsServer) }}
+    {{ $currentPage.Scratch.Add "page-tags" (slice (dict "p" $ct "type" "tag" "v" . "i" "fa-tag")) }}
+  {{ end }}
+{{ end }}
+{{ end }}
+
+{{ $result := $currentPage.Scratch.Get "page-tags" }}
+{{ if $result }}
+<section class="sidecar tags">
+  <header>
+    <h1>{{ T "sidebar-title-tags" }}</h1>
+  </header>
+  <ul>
+    {{ range sort $result "v" "asc" "type" "asc"}}
+      {{ with . }}
+        <li class="{{ .type }}">
+          <a
+            href="{{ .p.RelPermalink }}"
+            hreflang="{{ $currentPage.Site.Language.Lang | lower }}"
+            rel="{{ .type }}"
+            title="{{ .p.LinkTitle }}"
+            ><i class="fa-solid {{ .i }}"></i>&nbsp;{{ .p.LinkTitle }}{{ if .p.Params.draft }}&nbsp;<span class="draft">(Draft)</span>{{ end }}</a>
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+{{ end }}

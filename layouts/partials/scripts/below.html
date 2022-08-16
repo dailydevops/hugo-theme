@@ -1,0 +1,16 @@
+{{ $copyJs := resources.Get "js/copy.js" }}
+{{ $menuJs := resources.Get "js/menu.js" }}
+{{ $js := slice $copyJs $menuJs | resources.Concat "js/below.js" }}
+{{ if .Site.IsServer }}
+{{ $js = $js | fingerprint "sha512" }}
+<script async defer src="{{ $js.RelPermalink }}"></script>
+{{ else }}
+{{ $js = $js | minify | fingerprint "sha512" }}
+<script async defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}
+{{ if .Page.Store.Get "hasMermaid" }}
+<script async src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true });
+</script>
+{{ end }}

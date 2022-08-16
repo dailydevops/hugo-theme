@@ -1,0 +1,14 @@
+{{ $links := .Params.links }}
+{{ with $links }}
+<section class="sidecar links">
+  <header>
+    <h1>{{ T "sidebar-title-links" }}</h1>
+  </header>
+  {{ range $links }}
+  <a href="{{ .url | safeURL }}"{{ with .title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .url "http" }} target="_blank" rel="noopener external noreferrer"{{ end }}>
+    <i class="fa-solid fa-angles-right"></i>&nbsp;
+    {{ .name | safeHTML }}
+  </a>
+  {{ end }}
+</section>
+{{ end }}

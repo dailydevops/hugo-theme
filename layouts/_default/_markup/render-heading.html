@@ -1,0 +1,10 @@
+{{- if (eq .Level 1) }}{{ errorf "%s: `h1`-element is not allowed." .Page.RelPermalink }}{{ end }}
+{{ $maxAnchorLevel := .Page.Site.Params.maxanchorlevel | default 4 }}
+{{ if or (lt $maxAnchorLevel 2) (gt $maxAnchorLevel 6) }}
+{{ errorf "%s: Invalid MaxAnchorLevel %d" .Page.RelPermalink $maxAnchorLevel }}
+{{ end }}
+{{ if and (ge .Level 2) (le .Level $maxAnchorLevel) }}
+<h{{ .Level }} id="{{ .Anchor | safeURL }}"><a href="{{ .Page.RelPermalink }}#{{ .Anchor | safeURL }}" title="{{ .Text | safeHTML }}">{{ .Text | safeHTML }}</a></h{{ .Level }}>
+{{ else }}
+<h{{ .Level }}>{{ .Text | safeHTML }}</h{{ .Level }}>
+{{ end }}

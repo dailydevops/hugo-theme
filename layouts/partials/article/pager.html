@@ -1,0 +1,18 @@
+{{ if .Param "pager" }}
+{{ if or (.PrevInSection) (.NextInSection) }}
+<nav class="pager">
+	{{ with .NextInSection }}
+  <a class="next" href="{{ .RelPermalink }}" title="{{ .Title | safeHTML }}" rel="next">
+    <span class="sub"><i class="fa-solid fa-backward"></i>&emsp;{{ T "navigation-next" }}</span>
+    <p class="title">{{ .Title | safeHTML }}</p>
+  </a>
+	{{ end }}
+	{{ with .PrevInSection }}
+  <a class="prev" href="{{ .RelPermalink }}" title="{{ .Title | safeHTML }}" rel="prev">
+    <span class="sub">{{ T "navigation-prev" }}&emsp;<i class="fa-solid fa-forward"></i></span>
+    <p class="title">{{ .Title | safeHTML }}</p>
+  </a>
+	{{ end }}
+</nav>
+{{ end }}
+{{ end }}

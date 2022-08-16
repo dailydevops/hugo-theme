@@ -1,0 +1,23 @@
+{{ if and (eq .Type "posts") (.IsPage) }}
+{{ partial "image/picture/render" (
+  dict
+  "destination" .Params.hero
+  "mode" "fill"
+  "class" "hero"
+  "page" .Page
+  "title" .Page.Title
+  "hidecaption" true
+  "hidecopyright" true
+  "lazy" false
+  "width" (dict
+    "XS" (.Page.Site.Params.Theme.Hero.XS | default 544)
+    "SM" (.Page.Site.Params.Theme.Hero.SM | default 672)
+    "MD" (.Page.Site.Params.Theme.Hero.MD | default 896)
+    "LG" (.Page.Site.Params.Theme.Hero.LG | default 1104)
+    "XL" (.Page.Site.Params.Theme.Hero.XL | default 1444)
+  )
+  "height" (dict
+    "XL" (.Page.Site.Params.Theme.HeroRatio.XL | default 361)
+  )
+) }}
+{{ end }}

@@ -1,0 +1,8 @@
+{{ $breakpoint := .b }}
+{{ $width := .w1 }}
+{{ $nextWidth := .w2 }}
+{{ $result := "" }}
+{{ if ge $width $nextWidth }}
+  {{ $result = $breakpoint }}
+{{ end }}
+{{ return $result }}

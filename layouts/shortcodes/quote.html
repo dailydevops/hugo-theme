@@ -1,0 +1,4 @@
+<blockquote>
+  {{ .Inner | $.Page.RenderString }}
+  {{ with .Get "cite" }}<footer>&mdash; <cite>{{ . | $.Page.RenderString }}</cite></footer>{{ end }}
+</blockquote>

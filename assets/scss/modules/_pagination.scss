@@ -1,0 +1,23 @@
+/* Pagination */
+.pagination {
+  display: flex;
+  flex: 0 0 100%;
+  order: 9;
+  justify-content: center;
+  gap: .75rem;
+
+  .item {
+    display: inline-block;
+    padding: 10px 15px;
+    font-weight: 700;
+    color: $theme-color-black;
+    background: $theme-accent-light-grey;
+  }
+
+  .item:hover:enabled,
+  .item:active:enabled,
+  .current {
+    color: $theme-color-white;
+    background: $theme-color-primary;
+  }
+}

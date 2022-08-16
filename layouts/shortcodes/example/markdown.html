@@ -1,0 +1,17 @@
+{{ $trimmedInner := (trim .Inner "\n") }}
+{{ if $trimmedInner }}
+<div class="example">
+  <section class="markdown">
+    <header>
+      <h1>{{ T "example-title-markdown" }}</h1>
+    </header>
+    {{ highlight $trimmedInner "markdown" }}
+  </section>
+  <section class="rendered">
+    <header>
+      <h1>{{ T "example-title-rendered" }}</h1>
+    </header>
+    {{ $trimmedInner | .Page.RenderString }}
+  </section>
+</div>
+{{ end }}

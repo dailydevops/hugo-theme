@@ -1,0 +1,7 @@
+{{ $contentBlocks := split . "<!--ads-->" }}
+{{ if gt (len $contentBlocks) 3 }}
+  {{ errorf "Tag '<!--ads-->' is used too often (%d). Maximum 2 placements per article." (sub (len $contentBlocks) 1) }}
+{{ end }}
+{{ range $contentBlocks }}
+<section class="content">{{ . | safeHTML }}</section>
+{{ end }}

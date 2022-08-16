@@ -1,0 +1,7 @@
+{{ if not .Title }}
+{{ partial "function/throwError" (printf "%s: No title give." .RelPermalink) }}
+{{ end }}
+
+{{ if not .Description }}
+{{ partial "function/throwError" (printf "%s: No description give." .RelPermalink) }}
+{{ end }}

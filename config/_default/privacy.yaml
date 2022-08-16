@@ -1,0 +1,17 @@
+disqus:
+  disable: true
+googleAnalytics:
+  anonymizeIP: true
+  disable: true
+  respectDoNotTrack: true
+  useSessionStorage: true
+instagram:
+  disable: true
+twitter:
+  disable: true
+  enableDNT: false
+  simple: true
+vimeo:
+  disable: true
+youtube:
+  disable: true

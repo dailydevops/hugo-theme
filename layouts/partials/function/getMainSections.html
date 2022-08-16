@@ -1,0 +1,14 @@
+{{ $sections := .Page.Scratch.Get "getMainSections" | default (slice) }}
+{{ if not $sections }}
+  {{ if .IsHome }}
+    {{ $sections = .Params.sections.home | default .Site.Params.sections.home }}
+  {{ else if isset .Params.sections .Type }}
+    {{ $sections = index .Params.sections .Type }}
+  {{ else if isset .Site.Params.sections .Type }}
+    {{ $sections = index .Site.Params.sections .Type }}
+  {{ else }}
+    {{ $sections = slice .Type }}
+  {{ end }}
+  {{ .Page.Scratch.Set "getMainSections" $sections }}
+{{ end }}
+{{ return $sections }}

@@ -1,0 +1,18 @@
+{{ $page := .page }}
+{{ $image := .image }}
+{{ $error := .error | default true }}
+{{ $copyright := "" }}
+
+{{ if $image }}
+{{ $ext := path.Ext $image.Name }}
+{{ $base := strings.TrimSuffix $ext $image.Name }}
+{{ $file := (printf "%s.cp" $base) }}
+{{ $cpFile := $page.Resources.GetMatch (printf "%s" ($file | safeURL)) }}
+{{ if not $cpFile }}
+  {{ $cpFile = resources.Get (printf "%s" ($file | safeURL)) }}
+{{ end }}
+{{ if $cpFile }}
+{{ $copyright = $cpFile.Content }}
+{{ end }}
+{{ end }}
+{{ return (trim $copyright "\n") }}

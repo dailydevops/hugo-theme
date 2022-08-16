@@ -1,0 +1,6 @@
+application/atom+xml:
+  suffixes: ["atom"]
+application/rss+xml:
+  suffixes: ["rss"]
+text/deleteme:
+  suffixes: ["deleteme"]

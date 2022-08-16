@@ -1,0 +1,19 @@
+{{ $baseImage := .image }}
+{{ $width := .width }}
+{{ $breakpoint := .breakpoint }}
+
+{{ if ge $baseImage.Width $width }}
+  {{ $ext := .ext }}
+  {{ $base := .base }}
+
+  {{ $image := $baseImage.Resize (printf "%dx" $width) }}
+  {{ .page.Scratch.Add "deleteme" $image.RelPermalink }}
+  {{ $image = slice $image | resources.Concat (printf "%s-%dx%d%s" $base $image.Width $image.Height $ext) }}
+
+  {{ $webp := $baseImage.Resize (printf "%dx webp" $width) }}
+  {{ .page.Scratch.Add "deleteme" $webp.RelPermalink }}
+  {{ $webp = slice $webp | resources.Concat (printf "%s-%dx%d.webp" $base $webp.Width $webp.Height) }}
+
+  <source srcset="{{ $webp.RelPermalink }}?v={{ md5 $webp.Content }}" type="{{ $webp.MediaType.Type | safeHTML }}"{{ with $breakpoint }} media="{{ printf "(max-width: %.2fpx)" (sub . 0.02) }}"{{ end }}/>
+  <source srcset="{{ $image.RelPermalink }}?v={{ md5 $image.Content }}" type="{{ $image.MediaType.Type | safeHTML }}"{{ with $breakpoint }} media="{{ printf "(max-width: %.2fpx)" (sub . 0.02) }}"{{ end }}/>
+{{ end }}

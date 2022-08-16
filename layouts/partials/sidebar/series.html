@@ -1,0 +1,29 @@
+{{ $page := . }}
+{{ $pages := .Site.RegularPages }}
+{{ $isSectionView := false }}
+{{ with .Params.sidebar.filter.series }}
+  {{ if (eq . "section") }}
+  {{ $isSectionView = true }}
+  {{ $pages = (sort (where $.Site.RegularPages "Section" $page.Section) ".Params.order" "asc") }}
+  {{ end }}
+{{ end }}
+{{ if $pages }}
+<section class="sidecar series">
+  <header>
+    <h1>
+      {{ if $isSectionView }}
+      <a class="overview" href="{{ .CurrentSection.RelPermalink }}">{{ .CurrentSection.LinkTitle }}</a>
+      {{ else }}
+      {{ T "sidebar-title-series" }}
+      {{ end }}
+    </h1>
+  </header>
+  <ol>
+    {{ range $pages }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+    </li>
+    {{ end }}
+  </ol>
+</section>
+{{ end }}

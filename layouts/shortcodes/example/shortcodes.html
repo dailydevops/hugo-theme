@@ -1,0 +1,18 @@
+{{ $file := .Get "include" }}
+{{ if $file }}
+{{ $fileContent := .Page.Resources.GetMatch (printf "%s" ($file | safeURL)) }}
+{{ if not $fileContent }}
+    {{ $fileContent := resources.Get $file }}
+    {{ if not $fileContent }}{{ errorf "%s: File '%s' not found." .Page.RelPermalink $file }}{{ end }}
+{{ end }}
+
+{{ if not (.Page.Scratch.Get "deleteme") }}
+    {{ .Page.Scratch.Set "deleteme" (slice) }}
+{{ end }}
+{{ .Page.Scratch.Add "deleteme" $fileContent.RelPermalink }}
+
+{{ highlight $fileContent.Content "markdown" }}
+
+{{ $fileContent.Content | markdownify | .Page.RenderString }}
+
+{{ end }}

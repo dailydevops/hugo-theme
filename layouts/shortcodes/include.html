@@ -1,0 +1,26 @@
+{{ $file := .Get "file" }}
+{{ $type := .Get "type" }}
+{{ $language := .Get "language" }}
+{{ $options := .Get "options" }}
+
+{{ $fileContent := .Page.Resources.GetMatch (printf "%s" ($file | safeURL)) }}
+{{ if not $fileContent }}
+    {{ $fileContent := resources.Get $file }}
+    {{ if not $fileContent }}{{ errorf "%s: File '%s' not found." .Page.RelPermalink $file }}{{ end }}
+{{ end }}
+
+{{ if not (.Page.Scratch.Get "deleteme") }}
+    {{ .Page.Scratch.Set "deleteme" (slice) }}
+{{ end }}
+{{ .Page.Scratch.Add "deleteme" $fileContent.RelPermalink }}
+
+{{ if (.Get "language") }}
+    {{ highlight $fileContent.Content $language }}
+{{ else if eq $type "html" }}
+    {{ $fileContent.Content | safeHTML }}
+{{ else if eq $type "page" }}
+    {{ $page := .Site.GetPage $file }}
+    {{ with $page }}{{ .Content }}{{ end }}
+{{ else }}
+    {{ $fileContent.Content | .Page.RenderString }}
+{{ end }}

@@ -1,0 +1,25 @@
+{{ if .IsTranslated }}
+<section class="sidecar language">
+  <header>
+    <h1>{{ T "sidebar-title-language" }}</h1>
+  </header>
+  {{ range .AllTranslations }}
+    {{ $lang := .Site.Language }}
+      {{ if ne $lang $.Site.Language }}
+          {{ $langTitle := print .Title }}
+          {{ if or (.IsPage) (.IsSection) }}
+            {{ $langTitle = printf "%s &mdash; %s" $langTitle $.Site.Title }}
+          {{ end }}
+    <a
+      class="language"
+      href="{{ .RelPermalink }}"
+      hreflang="{{ $lang | lower}}"
+      title="{{ $langTitle | safeHTML }}"
+      rel="alternate"
+      >
+      {{ $lang }} {{ .Language.LanguageName }}
+    </a>
+      {{ end }}
+  {{ end }}
+</section>
+{{ end }}

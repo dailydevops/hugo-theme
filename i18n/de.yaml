@@ -1,0 +1,78 @@
+# Translations
+- id: navigation-next
+  translation: Nächste
+- id: navigation-prev
+  translation: Vorherige
+- id: pagination-title
+  translation: "{{ .Title }} &mdash; Seite {{ .Page }}"
+# SHARE
+- id: share-facebook
+  translation: In Facebook teilen
+- id: share-linkedin
+  translation: In LinkedIn teilen
+- id: share-reddit
+  translation: In Reddit teilen
+- id: share-twitter
+  translation: In Twitter teilen
+- id: share-xing
+  translation: In Xing teilen
+# SIDEBAR Social
+- id: sidebar-social-github
+  translation: Folgen Sie mir auf GitHub
+- id: sidebar-social-github-us
+  translation: Folgen Sie uns auf GitHub
+- id: sidebar-social-gitlab
+  translation: Folgen Sie mir auf GitLab
+- id: sidebar-social-gitlab-us
+  translation: Folgen Sie uns auf GitLab
+- id: sidebar-social-linkedin
+  translation: Folgen Sie mir auf LinkedIn
+- id: sidebar-social-linkedin-us
+  translation: Folgen Sie uns auf LinkedIn
+- id: sidebar-social-stackoverflow
+  translation: Folgen Sie mir auf Stack Overflow
+- id: sidebar-social-stackoverflow-us
+  translation: Folgen Sie uns auf Stack Overflow
+- id: sidebar-social-twitter
+  translation: Folgen Sie mir auf Twitter
+- id: sidebar-social-twitter-us
+  translation: Folgen Sie uns auf Twitter
+# SIDEBAR Title
+- id: sidebar-title-author
+  translation: Autor
+- id: sidebar-title-categories
+  translation: Kategorien
+- id: sidebar-title-language
+  translation: Verfügbare Übersetzungen
+- id: sidebar-title-links
+  translation: Zusätzliche Links
+- id: sidebar-title-related
+  translation: Verwandte Inhalte
+- id: sidebar-title-series
+  translation: Serieninhalt
+- id: sidebar-title-share
+  translation: Meinen Inhalt teilen
+- id: sidebar-title-share-us
+  translation: Teilen Sie unsere Inhalte auf
+- id: sidebar-title-social
+  translation: Folgen Sie mir auf
+- id: sidebar-title-social-us
+  translation: Folgen Sie uns auf
+- id: sidebar-title-tags
+  translation: Tags
+- id: sidebar-title-toc
+  translation: Inhaltsverzeichnis
+# 404
+- id: 404-title
+  translation: 404. Seite nicht gefunden
+- id: 404-text
+  translation: Die gesuchte Seite existiert nicht, wurde verschoben oder gelöscht.
+- id: 404-linktext
+  translation: Startseite
+# Example
+- id: example-title-markdown
+  translation: Darstellung als Markdown
+- id: example-title-rendered
+  translation: Gerenderte Darstellung
+- id: example-title-shortcodes
+  translation: Darstellung als Shortcode

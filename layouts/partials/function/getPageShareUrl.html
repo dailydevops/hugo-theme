@@ -1,0 +1,6 @@
+{{ $shareUrl := .Scratch.Get "getPageShareUrl" | default nil }}
+{{ if not ($shareUrl)}}
+  {{ $shareUrl = replace .Permalink (printf "/%s/" .Language) "/" }}
+  {{ .Scratch.Set "getPageShareUrl" $shareUrl }}
+{{ end }}
+{{ return $shareUrl }}

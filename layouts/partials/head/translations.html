@@ -1,0 +1,12 @@
+{{ if .IsTranslated }}
+{{ range .AllTranslations }}
+  {{ $lang := .Site.LanguageCode }}
+  {{ if eq .Site.LanguageCode $.Sites.First.LanguageCode }}{{ $lang = "x-default" }}{{ end }}
+  {{ $langTitle := print .Title }}
+  {{ if or (.IsPage) (.IsSection) }}{{ $langTitle = printf "%s &mdash; %s" .Title $.Site.Title }}{{ end }}
+  <link href="{{ .Permalink }}" hreflang="{{ $lang | lower }}" title="{{ $langTitle }}" rel="alternate" />
+  {{ end }}
+{{ end }}
+{{ range .AlternativeOutputFormats }}
+  {{ printf "<link href=%q hreflang=%q rel=%q type=%q/>" .Permalink ($.Site.Language | lower) .Rel .MediaType | safeHTML }}
+{{ end }}

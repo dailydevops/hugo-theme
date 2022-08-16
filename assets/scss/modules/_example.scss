@@ -1,0 +1,26 @@
+.example {
+  background-color: $theme-color-secondary;
+  display: flex;
+  gap: .25rem;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 1rem;
+  }
+
+  & .markdown,
+  & .rendered {
+    background-color: $theme-color-white;
+    flex: 1 0 40%;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  & .markdown {
+    padding-right: $theme-spacer-below;
+  }
+
+  & .rendered {
+    padding-left: $theme-spacer-below;
+  }
+}

@@ -1,0 +1,9 @@
+{{ $author := .Page.Scratch.Get "head-author" | default nil }}
+{{ if not ($author)}}
+  {{ $pageAuthor := .Params.Author | default $.Site.Author.name | default "default" }}
+  {{ if (ne $pageAuthor false) }}
+    {{ $author = index .Site.Data.authors $pageAuthor }}
+    {{ .Page.Scratch.Set "head-author" $author }}
+  {{ end }}
+{{ end }}
+{{ return $author }}
