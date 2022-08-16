@@ -6,6 +6,7 @@
 {{- else -}}
 {{- $pages = $pctx.Pages -}}
 {{- end -}}
+{{- $pages = where $pages "Type" "in" (partial "function/getMainSections" .) -}}
 {{- $limit := .Site.Config.Services.RSS.Limit -}}
 {{- if ge $limit 1 -}}
 {{- $pages = $pages | first $limit -}}
@@ -19,7 +20,7 @@
   <id>{{ "/" | absLangURL }}</id>
   <author>
     <name>{{ .Site.Author.name | default "default" | safeHTML  }}</name>
-    {{ with .Site.Author.email }}<email>{{ . }}</email>{{ end }}
+    {{- with .Site.Author.email }}<email>{{ . }}</email>{{ end }}
   </author>
   {{- with .Site.Copyright }}
   <rights>{{ . }}</rights>
@@ -48,7 +49,7 @@
     {{ end }}
     <updated>{{ dateFormat "2006-01-02T15:04:05Z" .Lastmod | safeHTML }}</updated>
     <published>{{ dateFormat "2006-01-02T15:04:05Z" .PublishDate | safeHTML }}</published>
-    <content type="html">{{ trim .Content "\n" }}</content>
+    <content type="html">{{ .Summary | html }}</content>
   </entry>
   {{- end }}
 </feed>
