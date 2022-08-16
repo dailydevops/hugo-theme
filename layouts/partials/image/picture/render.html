@@ -21,6 +21,7 @@
 {{ $hidecaption := .hidecaption | default false }}
 {{ $hidecopyright := .hidecopyright | default false }}
 {{ $lazy := .lazy | default true }}
+{{ $validateWidth := .validateWidth | default true }}
 
 {{ $captionWithCopyright := $caption }}
 {{ if $copyright }}
@@ -42,7 +43,7 @@
         {{ if (eq $destination $placeholder) }}
           {{ partial "function/throwError" (printf "%s: Invalid Placeholder in use." $page.RelPermalink) }}
         {{ else }}
-          {{ if (ge $width.XL $image.Width) }}
+          {{ if and (eq $validateWidth true) (ge $width.XL $image.Width) }}
             {{ partial "function/throwError" (printf "%s: Image '%s' to small (Width)." $page.RelPermalink $image.RelPermalink) }}
           {{ end }}
         {{ end }}
