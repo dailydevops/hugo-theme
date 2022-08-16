@@ -30,7 +30,7 @@
   }
 
   @include breakpoint-up(md) {
-    padding: $theme-spacer-above $theme-spacer-above 0;
+    padding: 0 $theme-spacer-above;
     gap: 1.5rem;
     .title {
       font-size: 2.5rem;
