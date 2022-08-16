@@ -1,0 +1,7 @@
+<section class="sidecar info">
+  <ul>
+    {{/* https://gohugo.io/functions/dateformat/#datetime-formatting-layouts */}}
+    <li>{{ T "sidebar-info-published" (printf "%s %s" (.PublishDate | time.Format ":date_short" ) (.PublishDate | time.Format ":time_short" )) }}</li>
+    <li>{{ T "sidebar-info-readingtime" .ReadingTime }}</li>
+  </ul>
+</section>

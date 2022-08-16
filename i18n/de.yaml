@@ -16,6 +16,13 @@
   translation: In Twitter teilen
 - id: share-xing
   translation: In Xing teilen
+# SIDEBAR Info
+- id: sidebar-info-readingtime
+  translation:
+    one: "{{ . }} Minute lesen"
+    other: "{{ . }} Minuten lesen"
+- id: sidebar-info-published
+  translation: "Veröffentlicht am {{ . }}"
 # SIDEBAR Social
 - id: sidebar-social-github
   translation: Folgen Sie mir auf GitHub
@@ -42,6 +49,8 @@
   translation: Autor
 - id: sidebar-title-categories
   translation: Kategorien
+- id: sidebar-title-info
+  translation: Informationen
 - id: sidebar-title-language
   translation: Verfügbare Übersetzungen
 - id: sidebar-title-links
