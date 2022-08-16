@@ -13,7 +13,7 @@ description: '{{ replace .Name "-" " " | title }}'
 # Please comment out, to use the correct author.
 # author: ''
 # Publish Date, must be set
-publishDate: {{ .Date }}
+publishDate: {{ dateFormat "2006-01-02T15:00:00Z07:00" (time (int (mul (div (sub (add now.Local.Unix 900) 1) 900) 900))) }}
 # Draft `false`, must be set for publish
 # draft: false
 
