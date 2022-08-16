@@ -16,6 +16,11 @@
   translation: Share on Twitter
 - id: share-xing
   translation: Share on Xing
+# SIDEBAR Language
+- id: sidebar-language-en
+  translation: Read in English
+- id: sidebar-language-de
+  translation: In Deutsch lesen
 # SIDEBAR Info
 - id: sidebar-info-readingtime
   translation:

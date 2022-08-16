@@ -17,7 +17,7 @@
       title="{{ $langTitle | safeHTML }}"
       rel="alternate"
       >
-      {{ $lang }} {{ .Language.LanguageName }}
+      {{ T (printf "sidebar-language-%s" $lang) }}
     </a>
       {{ end }}
   {{ end }}
