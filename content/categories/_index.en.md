@@ -14,4 +14,5 @@ menu:
 
 title: Category overview
 description: General overview of the categories we use.
+draft: false
 ---
