@@ -1,4 +1,11 @@
 ---
+## Page Settings - Do not change
+slug: posts
+translationKey: posts
+aliases:
+  - /posts/
+## End Page Settings
+
 cascade:
   pager: true
   author: default
