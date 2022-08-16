@@ -1,20 +1,22 @@
 .copy-code-button {
-	color: $theme-color-primary;
-	border: 1px solid $theme-color-primary;
-	border-radius: 5px 5px 5px 5px;
-	display: block;
-	padding: 2.5px;
-	font-size: .8rem;
-	height: $theme-font-size * 1.5;
-	width: $theme-font-size * 1.5;
-	position: absolute;
-	z-index: 5;
-	top: 5px;
-	right: 5px;
-	&:hover {
-		cursor: pointer;
-	}
-	&:focus {
-		outline: 0;
-	}
+  color: $theme-color-primary;
+  border: 1px solid $theme-color-primary;
+  border-radius: 5px 5px 5px 5px;
+  display: block;
+  padding: 2.5px;
+  font-size: .8rem;
+  height: $theme-font-size * 1.5;
+  width: $theme-font-size * 1.5;
+  position: absolute;
+  z-index: 5;
+  top: 5px;
+  right: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 0;
+  }
 }
