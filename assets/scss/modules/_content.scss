@@ -31,7 +31,8 @@ article {
 
   &:not(:last-of-type) {
     padding-bottom: 1.25rem;
-    border-bottom: 1px solid $theme-accent-light-grey;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid $theme-accent-dark-grey;
   }
 }
 
