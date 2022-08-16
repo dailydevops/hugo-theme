@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ site.Sites.First.Language }}">
 <head>
     <title>{{ .Permalink }}</title>
     <link rel="canonical" href="{{ .Permalink }}"/>
@@ -55,7 +55,7 @@
   <h1>This Page Has Moved!</h1>
   <p>
     For one reason or another — Web address typos and site reorganization are
-    <em>very</em> likely — "Setting up Raku with Rakubrew" moved to a new address.
+    <em>very</em> likely — "{{ site.Sites.First.Title }}" moved to a new address.
   </p>
   <p>
     If your browser does not immediately send you to the new location,
