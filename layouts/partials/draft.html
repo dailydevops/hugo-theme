@@ -6,13 +6,22 @@
   <ul>
     <li>Draft state: {{ with eq .Params.draft true }}<span class="focus">{{ . }}</span>{{ else }}false{{ end }}</li>
     <li>Reading time: {{ .ReadingTime }} minute(s)</li>
-    <li>Word count: {{ if lt .WordCount 500 }}<span class="focus">{{ $.WordCount }} word(s)</span>{{ else }}{{ .WordCount }} word(s){{ end }}</li>
+    <li>Word count: {{ if lt .WordCount 400 }}<span class="focus">{{ .WordCount }} word(s)</span>{{ else }}{{ .WordCount }} word(s){{ end }}</li>
     <li>Page kind: {{ .Kind }}</li>
     <li>Page type: {{ .Type }}</li>
-    {{- $charCount := len .RawContent -}}
-    <li>Char count: {{ if lt $charCount 2500 }}<span class="focus">{{ $charCount }} chars(s)</span>{{ else }}{{ $charCount }} chars(s){{ end }}</li></li>
+    {{- $content := .Content | safeHTML | plainify | safeHTML }}
+    {{- $charCount := len $content -}}
+    <li>Char count: {{ if lt $charCount 2800 }}<span class="focus">{{ $charCount }} chars(s)</span>{{ else }}{{ $charCount }} chars(s){{ end }}</li>
+    </li>
+  </ul>
 
-    {{ if and (eq .Type "posts") (.IsPage) }}
+  <details class="rawcontent">
+    <summary>RawContent</summary>
+    <textarea title="{{ .Title }} - RawContent" readonly>{{ $content }}</textarea>
+  </details>
+
+  {{ if and (eq .Type "posts") (.IsPage) }}
+  <ul>
     <li class="head">Post Settings</li>
     <li>Publish Date: {{ partial "value-or-not-set" .PublishDate }}</li>
     <li>Author: {{ partial "value-or-not-set" .Params.author }}</li>
@@ -21,8 +30,8 @@
     <li class="grow">Categories: {{ with .Params.categories }}{{ delimit . ", " }}{{ else }}{{ partial "not-set" }}{{ end }}</li>
     <li>Tags count: {{ partial "value-or-not-set" .Params.tags }}</li>
     <li class="grow">Tags: {{ with .Params.tags }}{{ delimit . ", " }}{{ else }}{{ partial "not-set" }}{{ end }}</li>
-    {{ end }}
   </ul>
+  {{ end }}
 </aside>
 {{ end }}
 

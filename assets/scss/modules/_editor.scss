@@ -30,6 +30,21 @@ aside.draft {
       flex: 1 0 60%;
     }
   }
+
+  .rawcontent {
+    font-size: 12px;
+    margin-top: 1rem;
+    width: 100%;
+
+    textarea {
+      background-color: $theme-accent-light-grey;
+      border: 1px $theme-accent-dark-grey solid;
+      padding: .25rem;
+      height: auto;
+      width: 100%;
+      min-height: 150px;
+    }
+  }
 }
 
 span.draft {
