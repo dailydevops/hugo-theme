@@ -10,4 +10,5 @@ menu:
   main:
     name: Posts
     weight: 3
+draft: false
 ---

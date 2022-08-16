@@ -10,4 +10,5 @@ menu:
   main:
     name: Beiträge
     weight: 3
+draft: false
 ---
