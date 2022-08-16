@@ -123,3 +123,9 @@ blockquote {
   clear: both;
   display: table;
 }
+
+details {
+  & > summary:first-of-type {
+    list-style: revert;
+  }
+}
