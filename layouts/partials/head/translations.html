@@ -1,10 +1,8 @@
+{{ $title := (partial "function/getPageTitle" . )}}
+<link href='{{ (partial "function/getPageShareUrl" .Page) }}' hreflang="x-default" title="{{ $title }}" rel="alternate" />
 {{ if .IsTranslated }}
 {{ range .AllTranslations }}
-  {{ $lang := .Site.LanguageCode }}
-  {{ if eq .Site.LanguageCode $.Sites.First.LanguageCode }}{{ $lang = "x-default" }}{{ end }}
-  {{ $langTitle := print .Title }}
-  {{ if or (.IsPage) (.IsSection) }}{{ $langTitle = printf "%s &mdash; %s" .Title $.Site.Title }}{{ end }}
-  <link href="{{ .Permalink }}" hreflang="{{ $lang | lower }}" title="{{ $langTitle }}" rel="alternate" />
+  <link href="{{ .Permalink }}" hreflang="{{ .Site.LanguageCode | lower }}" title="{{ $title }}" rel="alternate" />
   {{ end }}
 {{ end }}
 {{ range .AlternativeOutputFormats }}
