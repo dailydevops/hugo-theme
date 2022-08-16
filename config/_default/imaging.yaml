@@ -1,5 +1,5 @@
 # Default JPEG or WebP quality setting. Default is 75.
-quality: 75
+quality: 100
 
 # Default hint about what type of image. Currently only used for WebP encoding.
 # Default is "photo".
@@ -11,3 +11,9 @@ hint: picture
 # Smart Cropping is content aware and tries to find the best crop for each image.
 # Valid values are Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
 anchor: smart
+
+# You may specify the resampling filter used when resizing an image.
+# https://gohugo.io/content-management/image-processing/#resampling-filter
+# Valid values are Box, Lanczos, CatmullRom, MitchellNetravali, Linear, NearestNeighbor
+# Default: Box
+resampleFilter: Lanczos

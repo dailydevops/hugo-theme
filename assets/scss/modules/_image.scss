@@ -25,6 +25,10 @@ figcaption {
   font-style: italic;
   flex: 1 0 45%;
   order: 2;
+
+  @include breakpoint-up(lg) {
+    font-size: .75rem;
+  }
 }
 
 .hero {
