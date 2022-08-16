@@ -10,5 +10,8 @@ menu:
   main:
     name: Beiträge
     weight: 3
+
+title: Artikelübersicht
+description: Übersicht über alle von uns veröffentlichten Artikel.
 draft: false
 ---
