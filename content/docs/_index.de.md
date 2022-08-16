@@ -11,6 +11,7 @@ sidebar:
     - series
   filter:
     series: section
+draft: true
 cascade:
   draft: true
   order: 999
