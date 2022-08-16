@@ -81,6 +81,9 @@ $theme-table-border-style: 1px solid $theme-table-border-color;
 // Hugo Theme - NetEvolve
 @import "mixins";
 @import "modules";
+{{ if .Site.IsServer }}
+@import "modules/editor";
+{{ end }}
 
 // Font Awesome
 @import "brands";
