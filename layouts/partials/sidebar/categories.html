@@ -6,8 +6,8 @@
 {{ if . }}
   {{ $path := printf "/categories/%s/" (. | urlize) }}
   {{ $ct := $currentPage.Site.GetPage $path }}
-  {{ if not $ct }}{{ partial "function/throwError" $path }}{{ end }}
-  {{ if or (not $ct.Params.draft) ($currentPage.Site.IsServer) }}
+  {{ if $ct }}
+    {{ if $ct.Params.draft }}{{ partial "function/throwWarn" (printf "%s: Tag '%s' is in DRAFT Mode." $ct.RelPermalink .) }}{{ end }}
     {{ $currentPage.Scratch.Add "page-categories" (slice (dict "p" $ct "type" "category" "v" . "i" "fa-layer-group")) }}
   {{ end }}
 {{ end }}

@@ -6,8 +6,7 @@
 {{ if . }}
   {{ $path := printf "/tags/%s/" (. | urlize) }}
   {{ $ct := $currentPage.Site.GetPage $path }}
-  {{ if not $ct }}{{ partial "function/throwError" $path }}{{ end }}
-  {{ if or (not $ct.Params.draft) ($currentPage.Site.IsServer) }}
+  {{ if $ct }}
     {{ $currentPage.Scratch.Add "page-tags" (slice (dict "p" $ct "type" "tag" "v" . "i" "fa-tag")) }}
   {{ end }}
 {{ end }}
