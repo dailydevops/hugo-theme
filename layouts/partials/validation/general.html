@@ -1,7 +1,9 @@
+{{ if and (not .Page.IsHome) (ne .Page.Kind "404") }}
 {{ if not .Title }}
 {{ partial "function/throwError" (printf "%s: No title give." .RelPermalink) }}
 {{ end }}
 
 {{ if not .Description }}
 {{ partial "function/throwError" (printf "%s: No description give." .RelPermalink) }}
+{{ end }}
 {{ end }}
