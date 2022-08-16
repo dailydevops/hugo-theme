@@ -46,15 +46,19 @@ article {
   overflow-x: auto;
 }
 
+%nested-a a {
+  color: $theme-color-primary;
+
+  &:hover {
+    color: $theme-color-secondary;
+    text-decoration: underline;
+  }
+}
+
 .content,
 .warning {
-  & p a {
-    color: $theme-color-primary;
-
-    &:hover {
-      color: $theme-color-secondary;
-      text-decoration: underline;
-    }
+  & p {
+    @extend %nested-a
   }
 
   & ul,

@@ -30,6 +30,10 @@ th {
   font-weight: 700;
 }
 
+td {
+  @extend %nested-a
+}
+
 thead > tr {
   &:where(:only-child, :last-child) > th {
     border-bottom: 1px solid $theme-thead-border-color;
