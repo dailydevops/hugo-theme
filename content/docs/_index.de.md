@@ -21,6 +21,7 @@ cascade:
       - series
     filter:
       series: section
+  sitemap_disabled: true
 
 ## End Page Settings
 
