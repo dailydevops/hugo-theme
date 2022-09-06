@@ -11,7 +11,7 @@
     {{ if $logo }}
     <figure class="page-logo">
       <picture>
-        <img src="{{ $logo.RelPermalink }}?v={{ md5 $logo.Content }}" alt="DEV - Daily DevOps .NET" title="DEV - Daily DevOps .NET">
+        <img src="{{ $logo.RelPermalink }}?v={{ md5 $logo.Content }}" alt="{{ $logoTitle | safeHTML }}" title="{{ $logoTitle | safeHTML }}">
       </picture>
     </figure>
     {{ end }}
