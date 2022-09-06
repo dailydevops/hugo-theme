@@ -7,6 +7,7 @@
   {{ $path := printf "/tags/%s/" (. | urlize) }}
   {{ $ct := $currentPage.Site.GetPage $path }}
   {{ if $ct }}
+    {{ if $ct.Params.draft }}{{ partial "function/throwWarn" (printf "%s: Tag '%s' is in DRAFT Mode." $ct.RelPermalink .) }}{{ end }}
     {{ $currentPage.Scratch.Add "page-tags" (slice (dict "p" $ct "type" "tag" "v" . "i" "fa-tag")) }}
   {{ end }}
 {{ end }}
