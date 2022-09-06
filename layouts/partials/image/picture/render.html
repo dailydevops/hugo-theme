@@ -59,9 +59,16 @@
 
         {{ $internalImage := $image}}
         {{ if eq $mode "fill" }}
-          {{ $internalImage = $image.Fill (printf "%dx%d" $width.XL $height.XL) }}
-          {{ $page.Scratch.Add "deleteme" $internalImage.RelPermalink }}
-          {{ $internalImage = slice $internalImage | resources.Concat (printf "%s-%dx%d%s" $base $width.XL $height.XL $ext) }}
+          {{ $filledImagePath := (printf "%s-%dx%d%s" $base $width.XL $height.XL $ext) }}
+          {{ $imageAlreadyExists := (partial "function/getImage" (dict "destination" $filledImagePath "page" $page "error" false )) }}
+
+          {{ if not $imageAlreadyExists }}
+            {{ $internalImage = $image.Fill (printf "%dx%d" $width.XL $height.XL) }}
+            {{ $page.Scratch.Add "deleteme" $internalImage.RelPermalink }}
+            {{ $internalImage = slice $internalImage | resources.Concat $filledImagePath }}
+          {{ else }}
+            {{ $internalImage = $imageAlreadyExists }}
+          {{ end }}
         {{ end }}
 
         {{ $params := (dict "page" $page "base" $base "ext" $ext "image" $internalImage) }}
