@@ -1,17 +1,39 @@
 {{ if .Site.Menus.main }}
+{{ $logoTitle := .Site.Params.logo.title | default .Site.Title }}
 <nav class="menu">
-	<button class="burger" aria-haspopup="true" aria-expanded="false" tabindex="0">
+  <button class="burger" aria-haspopup="true" aria-expanded="false" tabindex="0">
     <i class="fa-solid fa-burger"></i>
-	</button>
-	<ul class="navigation">
-		{{ $currentNode := . }}
-		{{ range .Site.Menus.main }}
-		{{ if .Name }}
-		<li{{ if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} class="active"{{ end }}>
-			<a href="{{ .URL }}">{{ .Pre }}{{ .Name }}{{ .Post }}</a>
-		</li>
-		{{ end }}
-		{{ end }}
-	</ul>
+  </button>
+  <ul class="navigation">
+    {{ $currentNode := . }}
+    {{ range .Site.Menus.main }}
+    {{ if .Name }}
+    <li
+    {{ if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} class="active" {{ end }}>
+      <a href="{{ .URL }}">{{ .Pre }}{{ .Name }}{{ .Post }}</a>
+    </li>
+    {{ end }}
+    {{ end }}
+
+    {{ if .IsTranslated }}
+    {{ range .AllTranslations }}
+    {{ $lang := .Site.Language }}
+    {{ if ne $lang $.Site.Language }}
+    {{ $translationKey := printf "sidebar-language-%s" $lang }}
+    {{ $langTitle := printf "%s &mdash; %s" .Title (T $translationKey) }}
+    <li class="translation">
+      <a href="{{ .RelPermalink }}" hreflang="{{ $lang | lower}}" title="{{ $langTitle | safeHTML }}" rel="alternate">
+        {{- $flag := (partial "function/getImage" (dict "destination" (printf "images/flag_%s.svg" $lang) "page" .Page)) -}}
+        <figure>
+          <picture>
+            <img src="{{ $flag.RelPermalink }}?v={{ md5 $flag.Content }}" alt="{{ $langTitle | safeHTML}}" title="{{ $langTitle | safeHTML}}">
+          </picture>
+        </figure>
+      </a>
+    </li>
+    {{ end }}
+    {{ end }}
+    {{ end }}
+  </ul>
 </nav>
 {{ end }}

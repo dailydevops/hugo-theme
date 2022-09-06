@@ -24,6 +24,7 @@
   @include breakpoint-down(md) {
     padding: $theme-spacer-below $theme-spacer-below 0;
     gap: .5rem;
+
     .title {
       font-size: 1.25rem;
     }
@@ -32,6 +33,7 @@
   @include breakpoint-up(md) {
     padding: 0 $theme-spacer-above;
     gap: 1.5rem;
+
     .title {
       font-size: 2.5rem;
     }
@@ -58,6 +60,7 @@
     color: $theme-color-black;
     font-size: 4rem;
     line-height: 1;
+
     @include breakpoint-up(md) {
       display: none;
       visibility: hidden;
@@ -111,5 +114,22 @@
     display: flex;
     padding: .5rem .875rem;
     gap: .25rem;
+  }
+
+  & li.translation {
+    figure {
+      width: 2rem;
+      margin-bottom: 0 !important;
+
+      @include breakpoint-down(md) {
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@include breakpoint-up(md) {
+  li:not(.translation)+li.translation {
+    margin-left: auto;
   }
 }
