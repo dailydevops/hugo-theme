@@ -3,12 +3,17 @@
 {{ $page := .page }}
 
 {{ $isRemote := strings.HasPrefix $destination "http" }}
+{{ $disallowSvg := .disallowsvg | default false }}
 
 {{ $image := false }}
 {{ $copyright := false }}
 {{ if not $isRemote }}
   {{ $image = (partial "function/getImage" (dict "destination" $destination "page" $page)) }}
   {{ $copyright = (partial "function/getCopyright" (dict "image" $image "page" $page)) }}
+{{ end }}
+
+{{ if and ($disallowSvg) (eq $image.MediaType.SubType "svg") }}
+{{ partial "function/forceError" (printf "%s: SVG Format '%s' is not allowed" $page.RelPermalink $image.RelPermalink) }}
 {{ end }}
 
 {{ $mode := .mode | default "resize" }}
