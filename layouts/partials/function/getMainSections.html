@@ -2,6 +2,8 @@
 {{ if not $sections }}
   {{ if .IsHome }}
     {{ $sections = .Params.sections.home | default .Site.Params.sections.home }}
+  {{ else if and (eq .Kind "section") (eq .Params.sectionOverview true) }}
+    {{ $sections = slice .Section }}
   {{ else if isset .Params.sections .Type }}
     {{ $sections = index .Params.sections .Type }}
   {{ else if isset .Site.Params.sections .Type }}
