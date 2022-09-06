@@ -6,7 +6,7 @@
   <ul>
     <li>Draft state: {{ with eq .Params.draft true }}<span class="focus">{{ . }}</span>{{ else }}false{{ end }}</li>
     <li>Reading time: {{ .ReadingTime }} minute(s)</li>
-    <li>Word count: {{ if lt .WordCount 400 }}<span class="focus">{{ .WordCount }} word(s)</span>{{ else }}{{ .WordCount }} word(s){{ end }}</li>
+    <li>Word count: {{ if lt .WordCount 350 }}<span class="focus">{{ .WordCount }} word(s)</span>{{ else }}{{ .WordCount }} word(s){{ end }}</li>
     <li>Page kind: {{ .Kind }}</li>
     <li>Page type: {{ .Type }}</li>
     {{- $content := .Content | safeHTML | plainify | safeHTML }}
@@ -14,7 +14,6 @@
     <li>Char count: {{ if lt $charCount 2800 }}<span class="focus">{{ $charCount }} chars(s)</span>{{ else }}{{ $charCount }} chars(s){{ end }}</li>
     </li>
   </ul>
-
   <details class="rawcontent">
     <summary>RawContent</summary>
     <textarea title="{{ .Title }} - RawContent" readonly>{{ $content }}</textarea>
@@ -24,8 +23,9 @@
   <ul>
     <li class="head">Post Settings</li>
     <li>Publish Date: {{ partial "value-or-not-set" .PublishDate }}</li>
+    <li class="grow">PR Scheduler Command: <b>@prscheduler {{ dateFormat "02/01/2006T15:04" (time (int (add .PublishDate.Unix 300))) }}</b></li>
     <li>Author: {{ partial "value-or-not-set" .Params.author }}</li>
-    <li>VG-Wort marker: {{ partial "value-or-not-set" .Params.vgwort }}</li>
+    <li class="grow">VG-Wort marker: {{ partial "value-or-not-set" .Params.vgwort }}</li>
     <li>Categories count: {{ partial "value-or-not-set" .Params.categories }}</li>
     <li class="grow">Categories: {{ with .Params.categories }}{{ delimit . ", " }}{{ else }}{{ partial "not-set" }}{{ end }}</li>
     <li>Tags count: {{ partial "value-or-not-set" .Params.tags }}</li>

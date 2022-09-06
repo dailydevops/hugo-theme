@@ -14,3 +14,10 @@
   mermaid.initialize({ startOnLoad: true });
 </script>
 {{ end }}
+
+{{ $author := (partial "function/getPageAuthorObject" . ) }}
+{{ if and (not .Site.IsServer) (eq $author.useVGWort true) }}
+{{ with .Params.vgwort }}
+<img class="vgwort" src="https://vg02.met.vgwort.de/na/{{ . }}" width="1" height="1" alt="VG Wort">
+{{ end }}
+{{ end }}
